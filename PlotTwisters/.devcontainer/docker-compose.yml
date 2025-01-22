@@ -1,13 +1,11 @@
-version: "3.1"
-
 services:
   db:
     image: mariadb:latest
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: plottwister
+      MYSQL_ROOT_PASSWORD: plottwisters
       MYSQL_USER: U04
-      MYSQL_PASSWORD: plottwister
+      MYSQL_PASSWORD: plottwisters
       MYSQL_DATABASE: U04-plottwisters
     ports:
       - "3306:3306"
