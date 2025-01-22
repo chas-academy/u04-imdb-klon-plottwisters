@@ -47,7 +47,7 @@ _250120_
 - Meddela om man inte kan/ kommer sent  
 - Små beslut tas snabbt, dra inte ut på det  
 - Be om hjälp om det behövs  
-
+- Reviews på torsdagar (man går igenom vad man gjort)
 
 ### Tider för standups: (max 15min)  
 kl 11.10, Mån  
