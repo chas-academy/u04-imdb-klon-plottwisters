@@ -8,6 +8,20 @@ Handles operations related to movies, including listing, displaying details, and
   - Purpose: Display a list of movies (homepage or movies page).
   - Route: `GET /movies`
 
+- `store(Request $request)`:
+  - Purpose: Allow a user to save a new movie.
+  - Route: `POST /movies`
+  - Parameters: `movie_name`
+
+- `update(Request $request, $id)`:
+  - Purpose: Update an existing movie.
+  - Route: `PUT /movies/{id}`
+  - Parameters: `movie_name`.
+
+- `destroy($id)`:
+  - Purpose: Delete a movie.
+  - Route: `DELETE /movies/{id}`
+
 - `show($id)`:
   - Purpose: Display details of a specific movie.
   - Route: `GET /movies/{id}`
