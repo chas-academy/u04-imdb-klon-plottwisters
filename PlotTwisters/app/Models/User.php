@@ -12,7 +12,6 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     
-    protected $primarykey ='user_id';
     protected $fillable = ['username', 'email', 'password', 'is_admin'];
 
     public function reviews() {

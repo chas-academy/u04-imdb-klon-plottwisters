@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        Schema::create('movie_genre', function (Blueprint $table) {
             $table->foreignId('movie_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignId('genre_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('movie_genre');
     }
 };
