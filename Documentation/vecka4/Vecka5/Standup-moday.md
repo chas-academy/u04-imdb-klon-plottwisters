@@ -17,7 +17,7 @@
 
 ### Vad jobbade du med igår?
 
-Anna - Gjorde klart sitemap
+Anna - Gjort klart sitemap
 
 Gabbe - Jobbade vidare på models och migrations
 
