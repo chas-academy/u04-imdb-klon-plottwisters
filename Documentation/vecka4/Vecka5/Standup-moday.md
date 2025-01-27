@@ -45,4 +45,4 @@ Madde - Plugga på om laravel.
 
 ### Finns det några hinder eller problem som måste åtgärdas?
 
-Få klart design beslut.
+Få klart design och design beslut.
