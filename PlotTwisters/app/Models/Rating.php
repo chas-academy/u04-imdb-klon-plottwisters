@@ -9,7 +9,7 @@ class Rating extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'rating_id';
+
     protected $fillable = ['rating', 'movie_id'];
 
     public function movie()

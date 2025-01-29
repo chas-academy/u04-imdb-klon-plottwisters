@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model {
 use HasFactory;
 
-protected $primaryKey = 'movie_id';
 protected $fillable = ['title', 'description', 'trailer_url', 'image_url', 'director_name'];
 
 public function reviews() {

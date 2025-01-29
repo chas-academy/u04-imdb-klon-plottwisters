@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'review_id';
+    
     protected $fillable = ['user_id', 'movie_id'];
 
     public function user()
