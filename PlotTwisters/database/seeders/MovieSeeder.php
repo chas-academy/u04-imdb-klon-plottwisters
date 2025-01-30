@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,9 +17,9 @@ class MovieSeeder extends Seeder
         Movie::factory()->count(5)->create();
 
         Genre::factory()->create(
-            ['genre_name' => 'Comedy'],
-            ['genre_name' => 'Drama'],
-            ['genre_name' => 'Horror'],
+            ['genre_name' => 'Horror']
+        );
+        Genre::factory()->create(
             ['genre_name' => 'Family']
         );
     }
