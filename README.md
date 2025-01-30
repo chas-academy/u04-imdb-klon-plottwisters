@@ -2,7 +2,16 @@
 <!-- insert content -->
 
 ## Getting started
- <!-- insert content -->
+- Clone the project
+- ```composer install```
+- ```npm install```
+- create .env file with envexample ```cp .env.example .env```
+- ```php artisan key:generate```
+- ```npm run build``` (if error run ```npm install vite@6.0.8 --save-dev```)
+- Go to .devcontainer folder and run ```docker compose up``` 
+- länka projektet i Herd appen
+
+
 
 ## Documentation
 [Wireframes](https://www.figma.com/design/5UquiqSYlvEPiSWvdrFf6P/U04-?node-id=1-2&t=uhA5UZarIB90L1Jx-1)  
