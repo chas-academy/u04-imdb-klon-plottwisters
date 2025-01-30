@@ -12,7 +12,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     
-    protected $fillable = ['username', 'email', 'password', 'is_admin'];
+    protected $fillable = ['name', 'email', 'password', 'is_admin'];
 
     public function reviews() {
         return $this->hasMany(Review::class, 'user_id');
