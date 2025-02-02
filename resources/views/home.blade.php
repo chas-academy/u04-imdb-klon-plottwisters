@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>PlotTwisters</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,24 +16,38 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
     </head>
-<body>
+<body class="bg-[#1E1E1E]">
     @include ('layouts.navigation')
-    @foreach ($movies as $movie)
-        <p>{{ $movie['title'] }}</p>
-        <img src="{{ $movie->image_url}}" alt="">
-        <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">View</a>
+    <div class="flex flex-1 items-start w-fit m-4 flex-col mx-auto">
+        <h2 class="text-white">Featured</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LNlrGhBpYjc?si=2eNr-AiXiSOwc5xG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="flex flex-row flex-wrap w-2/3 mx-auto">
+        @foreach ($movies as $movie)
 
-        @if (Auth::check() && Auth::user()->name == 'admin')
-        <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
+                <div class="flex flex-col flex-1 items-center m-4">
+                    {{-- <p>{{ $movie['title'] }}</p> --}}
+                    <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info"><img src="{{ $movie->image_url}}" alt=""></a>
+                    {{-- Route to store into watchlist, right now its set to home because missing controller for watchlist --}}
+                    <a href="{{ route('home', $movie->id) }}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md">Add to watchlist</a>
+                </div>
+                @if (Auth::check() && Auth::user()->name == 'admin')
+                <a href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 
-        <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
-        </form>
-        @endif
-    @endforeach
+                <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
+                </form>
+                @endif
+        
+
+        @endforeach
+    </div>
     @if (Auth::check() && Auth::user()->name == 'admin')
-    <a href="{{ route('movies.create') }}" class="btn btn-primary">Add Movie</a>
+
+        <a href="{{ route('movies.create') }}" class="btn btn-primary">Add Movie</a>
+
     @endif
+    {{ $movies->links() }}
 </body>
