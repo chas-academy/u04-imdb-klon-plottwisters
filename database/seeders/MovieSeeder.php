@@ -14,7 +14,7 @@ class MovieSeeder extends Seeder
      */
     public function run(): void
     {
-        Movie::factory()->count(5)->create();
+        Movie::factory()->count(20)->create();
 
         Genre::factory()->create(
             ['genre_name' => 'Horror']
