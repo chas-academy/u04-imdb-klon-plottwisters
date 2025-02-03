@@ -5,7 +5,9 @@
                 {{-- <p>{{ $movie['title'] }}</p> --}}
                 <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info"><img src="{{ $movie->image_url}}" alt=""></a>
                 {{-- Add function for rating --}}
-                <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p>
+                <div class="flex flex-row items-center">
+                    <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p>
+                </div>
                 {{-- Route to store into watchlist, right now its set to home because missing controller for watchlist --}}
                 <a href="{{ route('home', $movie->id) }}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to watchlist</a>
             
