@@ -55,4 +55,9 @@ Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])
 ->middleware(['auth', 'verified'])
 ->name('movies.destroy');
 
+Route::get('/movies/{id}/reviews', function() {
+    $movies = Movie::all();
+    return view('movies.reviews');
+})->middleware(['auth', 'verified'])->name('reviews');
+
 require __DIR__.'/auth.php';

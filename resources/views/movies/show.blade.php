@@ -8,7 +8,7 @@
             <p class="text-white">{{ $movie->director_name }}</p>
             <div class="flex flex-col">
                 <a href="" class ="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Leave a review</a>
-                <a href="" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">See all reviews</a>
+                <a href="{{ route('reviews', $movie->id)}}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">See all reviews</a>
             </div>
         </div>
         <div class="flex flex-col w-2/3 mx-auto items-center">
