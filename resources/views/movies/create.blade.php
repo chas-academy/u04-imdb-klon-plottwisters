@@ -27,6 +27,15 @@
          <label for="director_name" class="form-label">Director</label>
          <input type="text" name="director_name" class="form-control">
      </div>
+
+     <div class="mb-3">
+            <label for="genres" class="form-label">Genres</label>
+            <select name="genres[]" class="form-control" multiple>
+                @foreach($genres as $genre)
+                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                @endforeach
+            </select>
+        </div>
  
      <button type="submit" class="btn btn-primary">Save Movie</button>
  </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -22,7 +23,8 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $genres = Genre::all(); // Fetch all available genres
+        return view('movies.create',  compact('genres'));
     }
 
     /**
@@ -67,7 +69,7 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
         // Show edit form with the movie data
-        return view('edit', compact('movie'));
+        return view('movies.edit', compact('movie'));
     }
 
     /**
@@ -94,7 +96,7 @@ class MovieController extends Controller
         ]);
 
         // Redirect to the movies list with success message
-        return redirect()->route('/')->with('success', 'Movie updated successfully!');
+        return redirect()->route('home')->with('success', 'Movie updated successfully!');
     }
 
     /**
@@ -106,6 +108,6 @@ class MovieController extends Controller
         $movie->delete();
 
         // Redirect to the movies list with success message
-        return redirect()->route('/')->with('success', 'Movie deleted successfully!');
+        return redirect()->route('home')->with('success', 'Movie deleted successfully!');
     }
 }
