@@ -4,7 +4,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
-use App\Models\Movie;
+
 
 // Route::get('/', function () {
 //     return view('welcome');

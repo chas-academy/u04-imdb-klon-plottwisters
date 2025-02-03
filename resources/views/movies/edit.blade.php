@@ -1,3 +1,2 @@
-<div>
-    <h1> edit movie </h1>
-</div>
+<x-head-layout>
+</x-head-layout>
