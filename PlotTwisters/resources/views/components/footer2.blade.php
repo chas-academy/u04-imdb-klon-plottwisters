@@ -1,0 +1,4 @@
+<div class="big bg-custom-gray text-white mt-8 m-0 font-sans py-3">
+    <p class="text-center text-lg text-sm">Plottwisters</p>
+    <p class="text-center text-lg text-sm">Memoona, Ida, Svea, Madeleine, Gabriel, Anna</p>
+</div>
