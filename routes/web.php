@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Movie;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,6 +12,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/search', function () {
+    $query = request('search');
+    $movies = Movie::where('title', 'like', '%' . $query . '%')->get();
+    
+    return view('search', compact('movies', 'query')); 
+});
 
 
 Route::middleware('auth')->group(function () {
