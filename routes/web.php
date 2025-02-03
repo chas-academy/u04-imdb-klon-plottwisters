@@ -4,6 +4,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
+use App\Models\Movie;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -13,6 +14,12 @@ Route::get('/', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 
+Route::get('/search', function () {
+    $query = request('search');
+    $movies = Movie::where('title', 'like', '%' . $query . '%')->get();
+    
+    return view('search', compact('movies', 'query')); 
+});
 
 
 Route::middleware('auth')->group(function () {
