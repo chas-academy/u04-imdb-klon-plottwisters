@@ -15,11 +15,10 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="bg-gray-800">
-    <x-searchbar></x-searchbar>
-<div class="container mx-auto mt-6 text-white">
-   
-    <h2>Search results for: {{ $query }}</h2>
-    <div class="w-40 h-40 flex flex-wrap">
+    <div class="container mx-auto mt-6 text-white">
+        <x-searchbar></x-searchbar>
+        <h2>Search results for: {{ $query }}</h2>
+        <div class="w-40 h-40 flex flex-wrap">
         @foreach ($movies as $movie)
             <div class="p-4 m-4">
                 
