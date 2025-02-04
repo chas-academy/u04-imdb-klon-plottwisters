@@ -9,7 +9,7 @@ class Genre extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'genre_id';
+    protected $primaryKey = 'id';
     protected $fillable = ['genre_name'];
 
     public function movies()
