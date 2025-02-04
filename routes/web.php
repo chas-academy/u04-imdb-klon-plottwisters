@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,8 @@ Route::get('/', function () {
 Route::get('/search', function () {
     $query = request('search');
     $movies = Movie::where('title', 'like', '%' . $query . '%')->get();
-    
-    return view('search', compact('movies', 'query')); 
+
+    return view('search', compact('movies', 'query'));
 });
 
 
@@ -31,13 +32,21 @@ Route::middleware('auth')->group(function () {
 Route::controller(MovieController::class)->group(function () {
     Route::get('/', 'index')->name('home');
 });
-Route::get('/create', [MovieController::class, 'create'])
+
+
+
+//####################MOVIE##################
+
+Route::get('/movies', [MovieController::class, 'index'])
+->middleware(['auth', 'verified'])
+->name('movies.index');
+
+Route::get('/movies/create', [MovieController::class, 'create'])
 ->middleware(['auth', 'verified'])
 ->name('movies.create');
 
-Route::post('/', [MovieController::class, 'store'])
-->middleware(['auth', 'verified'])
-->name('movies.show');
+Route::post('/movies', [MovieController::class, 'store'])
+->middleware(['auth', 'verified']);
 
 Route::get('/movies/{movie}', [MovieController::class, 'show'])
 ->middleware(['auth', 'verified'])
@@ -63,5 +72,43 @@ Route::get('/movies/{id}/reviews', function() {
 Route::get('/review', function() {
     return view('reviews.create');
 });
+
+
+
+
+//####################GENRE##################
+
+Route::get('/genre', [GenreController::class, 'index'])
+->middleware(['auth', 'verified'])
+->name('genre.index');
+
+Route::get('/genre/create', [GenreController::class, 'create'])
+->middleware(['auth', 'verified'])
+->name('genre.create');
+
+
+Route::post('/genre', [GenreController::class, 'store'])
+->middleware(['auth', 'verified'])
+->name('genre-storing-route');
+
+Route::get('/genre/{genre}', [GenreController::class, 'show'])
+->middleware(['auth', 'verified'])
+->name('genre.show');
+
+
+Route::get('/genre/{genre}/edit', [GenreController::class, 'edit'])
+->middleware(['auth', 'verified'])
+->name('genre.edit');
+
+
+Route::put('/genre/{genre}', [GenreController::class, 'update'])
+->middleware(['auth', 'verified'])
+->name('genre.update');
+Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])
+->middleware(['auth', 'verified'])
+->name('genre.destroy');
+
+
+
 
 require __DIR__.'/auth.php';

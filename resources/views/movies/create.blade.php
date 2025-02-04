@@ -1,3 +1,4 @@
+
 <x-head-layout>
     <div>
         <h1>make movie entry</h1>
@@ -33,3 +34,4 @@
     </form>
     </div>
 </x-head-layout>
+

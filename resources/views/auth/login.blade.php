@@ -1,3 +1,4 @@
+@include  ('layouts.navigation')
 <x-guest-layout>
     <div class="flex flex-col lg:flex-row items-center justify-center lg:items-start w-full lg:w-3/4 mx-auto mt-10">
         <div class="w-full lg:w-1/2">

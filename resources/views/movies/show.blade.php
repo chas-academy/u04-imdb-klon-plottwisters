@@ -1,3 +1,4 @@
+
 <x-head-layout>
     <div class="flex flex-row w-2/3 mx-auto mt-10">
         <div>
@@ -34,3 +35,4 @@
         </div>
     </div>
 </x-head-layout>
+
