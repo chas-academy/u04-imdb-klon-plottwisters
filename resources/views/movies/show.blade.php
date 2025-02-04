@@ -1,52 +1,38 @@
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h1>{{ $movie->title }}</h1>
-                </div>
-                <div class="card-body">
-                    @if($movie->image_url)
-                        <img src="{{ $movie->image_url }}" alt="{{ $movie->title }}" class="img-fluid mb-3">
-                    @endif
-                    
-                    <p><strong>Director:</strong> {{ $movie->director_name }}</p>
-                    <p><strong>Description:</strong> {{ $movie->description }}</p>
-
-                    @if($movie->trailer_url)
-                        <div class="embed-responsive embed-responsive-16by9 mb-3">
-                            <iframe class="embed-responsive-item" src="{{ $movie->trailer_url }}" allowfullscreen></iframe>
-                        </div>
-                    @endif
-
-                    <h3>Genres</h3>
-                    <ul>
-                        @foreach($movie->genres as $genre)
-                            <li>{{ $genre->name }}</li>
-                        @endforeach
-                    </ul>
-
-                    <h3>Ratings</h3>
-                    @if($movie->ratings->count() > 0)
-                        <p>Average Rating: {{ number_format($movie->ratings->avg('rating'), 1) }} / 5</p>
-                    @else
-                        <p>No ratings yet.</p>
-                    @endif
-
-                    <h3>Reviews</h3>
-                    @if($movie->reviews->count() > 0)
-                        <ul>
-                            @foreach($movie->reviews as $review)
-                                <li><strong>{{ $review->user->name }}:</strong> {{ $review->content }}</li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p>No reviews yet.</p>
-                    @endif
-                </div>
+<x-head-layout>
+    <div class="flex flex-row w-2/3 mx-auto mt-10">
+        <div>
+            @include ('layouts.single-movie')
+            @include ('layouts.ratethefilm')
+            <p class="text-white">Rate the film</p>
+            <p class="text-[#A693FF]">Director:</p>
+            <p class="text-white">{{ $movie->director_name }}</p>
+            <div class="flex flex-col">
+                <a href="" class ="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Leave a review</a>
+                <a href="{{ route('reviews', $movie->id)}}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">See all reviews</a>
+            </div>
+        </div>
+        <div class="flex flex-col w-2/3 mx-auto items-center">
+            <iframe width="560" height="315" src="{{ $movie->trailer_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {{-- Route to store into watchlist, right now its set to home because missing controller for watchlist --}}
+            <a href="{{ route('home', $movie->id) }}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to watchlist</a>
+            <p class="text-white">{{ $movie->description }}</p>
+            {{-- @foreach ($reviews as $review) --}}
+            <div class="bg-white w-full mx-auto items-center mt-4">
+                <p class="text-center">PLACE FOR REVIEWS</p>
+                <br><br><br>
+                <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a>
+            </div>
+            {{-- @endforeach --}}
+            <div class="bg-white w-full mx-auto items-center mt-4">
+                <p class="text-center">PLACE FOR REVIEWS</p>
+                <br><br><br>
+            </div>
+            <div class="bg-white w-full mx-auto items-center mt-4">
+                <p class="text-center">PLACE FOR REVIEWS</p>
+                <br><br><br>
             </div>
         </div>
     </div>
-    <a href="{{ route('movies.edit', $movie->id) }}" >Edit Movie</a>
-</div>
+</x-head-layout>
+

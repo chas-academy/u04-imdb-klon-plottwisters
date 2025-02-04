@@ -33,6 +33,10 @@ Route::controller(MovieController::class)->group(function () {
     Route::get('/', 'index')->name('home');
 });
 
+
+
+//####################MOVIE##################
+
 Route::get('/movies', [MovieController::class, 'index'])
 ->middleware(['auth', 'verified'])
 ->name('movies.index');
@@ -60,9 +64,17 @@ Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])
 ->middleware(['auth', 'verified'])
 ->name('movies.destroy');
 
+Route::get('/movies/{id}/reviews', function() {
+    $movies = Movie::all();
+    return view('movies.reviews');
+})->middleware(['auth', 'verified'])->name('reviews');
 
 
-//genre
+
+
+
+//####################GENRE##################
+
 Route::get('/genre', [GenreController::class, 'index'])
 ->middleware(['auth', 'verified'])
 ->name('genre.index');
@@ -92,5 +104,8 @@ Route::put('/genre/{genre}', [GenreController::class, 'update'])
 Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])
 ->middleware(['auth', 'verified'])
 ->name('genre.destroy');
+
+
+
 
 require __DIR__.'/auth.php';
