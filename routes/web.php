@@ -60,4 +60,8 @@ Route::get('/movies/{id}/reviews', function() {
     return view('movies.reviews');
 })->middleware(['auth', 'verified'])->name('reviews');
 
+Route::get('/review', function() {
+    return view('reviews.create');
+});
+
 require __DIR__.'/auth.php';
