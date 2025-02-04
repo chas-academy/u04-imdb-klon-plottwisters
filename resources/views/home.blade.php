@@ -41,7 +41,7 @@
             </form>
         </div>
         @include ('layouts.movies')
-        </div>
+        
         @if (Auth::check() && Auth::user()->name == 'admin')
 
             <a href="{{ route('movies.create') }}" class="btn btn-primary">Add Movie</a>
