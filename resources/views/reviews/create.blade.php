@@ -9,14 +9,22 @@
         @endif
 <div class="w-1/3 mx-auto">
     <div class="mt-8">
-        <img src="https://posters.movieposterdb.com/22_01/2021/8721424/t_8721424_ac84bfc0.jpg" alt="">
+        <img src="{{-- {{$movie->image_url}} --}} https://posters.movieposterdb.com/22_01/2021/8721424/t_8721424_ac84bfc0.jpg" alt="">
     </div>
         <form class="flex flex-col gap-4" action="">
             <label>Title:</label>
-            <input type="text">
+            <input type="text" placeholder="{{--@if ($request->submit == 'edit') {{ $review->title }} @endif--}}">
             <label>Description</label>
-            <textarea rows="15"></textarea>
-            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit">Save</button>
+            <textarea rows="15">
+                {{-- @if ($request->submit == 'edit')
+                {{ $review->description }}
+                @endif --}}
+            </textarea>
+            {{-- @if ($request->submit == 'edit')
+                <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="delete">Delete</button>
+            @endif --}}
+            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="create">Save</button>
+
         </form>
     </div>
 </div>
