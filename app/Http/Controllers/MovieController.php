@@ -15,7 +15,8 @@ class MovieController extends Controller
     {
         $movies = Movie::all();
         $movies = Movie::paginate(18);
-        return view('home', compact('movies'));
+        $genres = Genre::all(); // Fetch all available genres
+        return view('home', compact('movies','genres' ));
     }
 
     /**

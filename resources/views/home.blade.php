@@ -30,13 +30,9 @@
         <div class="w-2/3 mx-auto">
             <form action="">
                 <select class="rounded-md" name="genre">
-                    <option value="">Genre</option>
-                    <option value="1">Horror</option>
-                    <option value="2">Family</option>
-                    <option value="3">Comedy</option>
-                    <option value="4">Drama</option>
-                    <option value="5">Action</option>
-                    
+                    @foreach ($genres as $genre)
+                    <option value= {{ $genre->id }} > {{ $genre->genre_name }} </option>
+                     @endforeach
                 </select>
             </form>
         </div>

@@ -10,7 +10,6 @@
         <p class="text-gray-700"><strong>Updated At:</strong>
             {{ $genre->updated_at ? $genre->updated_at->format('d M Y, H:i') : 'N/A' }}
         </p></div>
-        
 
     <div class="mt-6">
         <a href="{{ route('genre.edit', $genre) }}"
