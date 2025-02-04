@@ -69,10 +69,15 @@ Route::get('/movies/{id}/reviews', function() {
     return view('movies.reviews');
 })->middleware(['auth', 'verified'])->name('reviews');
 
+//#################### TEST ##################
+
 Route::get('/review', function() {
     return view('reviews.create');
 });
 
+Route::get('/admin/edit/', function() {
+    return view('admin.edit');
+});
 
 
 
