@@ -30,10 +30,12 @@
         <div class="w-2/3 mx-auto">
             <form action="">
                 <select class="rounded-md" name="genre">
+                    <option value="" disabled selected>Genre</option>
                     @foreach ($genres as $genre)
                     <option value= {{ $genre->id }} > {{ $genre->genre_name }} </option>
                      @endforeach
                 </select>
+                <button class="text-white" type="submit">Filter</button>
             </form>
         </div>
         @include ('layouts.movies')
