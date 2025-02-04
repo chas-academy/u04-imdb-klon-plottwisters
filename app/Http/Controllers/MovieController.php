@@ -22,7 +22,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('movies.create');
     }
 
     /**
