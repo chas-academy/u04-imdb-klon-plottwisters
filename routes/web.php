@@ -75,9 +75,10 @@ Route::get('/review', function() {
     return view('reviews.create');
 });
 
-Route::get('/admin/edit/', function() {
+Route::get('/admin/editUser', function() {
     return view('admin.edit');
 });
+
 
 
 
