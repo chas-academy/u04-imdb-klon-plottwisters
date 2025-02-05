@@ -21,6 +21,20 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function updatePicture(Request $request): RedirectResponse
+{
+    $request->validate([
+        'profile_picture' => 'required|in:profile1.png,profile2.png,profile3.png',
+    ]);
+
+    // Update user's profile picture
+    $user = Auth::user();
+    $user->profile_picture = $request->profile_picture;
+    $user->save();
+
+    return Redirect::route('profile.edit')->with('status', 'profile-picture-updated');
+}
+
     /**
      * Update the user's profile information.
      */
