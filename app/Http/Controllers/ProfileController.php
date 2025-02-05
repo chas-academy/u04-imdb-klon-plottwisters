@@ -32,7 +32,7 @@ class ProfileController extends Controller
     $user->profile_picture = $request->profile_picture;
     $user->save();
 
-    return Redirect::route('profile.edit')->with('status', 'profile-picture-updated');
+    return Redirect::route('profile.edit');
 }
 
     /**
