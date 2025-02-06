@@ -35,7 +35,7 @@ Route::controller(MovieController::class)->group(function () {
 
 
 
-//####################MOVIE##################
+//#################### MOVIE ##################
 
 Route::get('/movies', [MovieController::class, 'index'])
 ->middleware(['auth', 'verified'])
