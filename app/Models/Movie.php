@@ -19,7 +19,7 @@ public function ratings() {
 }
 
 public function genres() {
-    return $this->belongsToMany(Genre::class, 'movie_genre', 'movie_id', 'genre_id');
+    return $this->belongsToMany(Genre::class, 'movie_genres', 'movie_id', 'genre_id');
 }
 
 public function watchlists() {
