@@ -11,12 +11,20 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::all();
-        $movies = Movie::paginate(18);
+        $selectedGenre = $request->input('genre');
+
+        if ($selectedGenre) {
+            $movies = Movie::whereHas('genres', function ($query) use ($selectedGenre) {
+                $query->where('id', $selectedGenre);
+            })->paginate(18);
+        } else {
+            $movies = Movie::paginate(18);
+        }
+
         $genres = Genre::all(); // Fetch all available genres
-        return view('home', compact('movies','genres' ));
+        return view('home', compact('movies','genres', 'selectedGenre' ));
     }
 
     /**

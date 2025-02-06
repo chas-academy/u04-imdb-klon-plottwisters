@@ -28,16 +28,20 @@
             @endif
         </div>
         <div class="w-2/3 mx-auto">
-            <form action="">
-                <select class="rounded-md" name="genre">
-                    @foreach ($genres as $genre)
-                    <option value= {{ $genre->id }} > {{ $genre->genre_name }} </option>
-                     @endforeach
-                </select>
-            </form>
+            <form action="{{ route('home') }}" method="GET">
+                    <select class="rounded-md" name="genre" onchange="this.form.submit()">
+                        <option value="">All Genres</option>
+
+                        @foreach ($genres as $genre)
+                            <option value="{{ $genre->id }}" {{ request('genre') == $genre->id ? 'selected' : '' }}>
+                                {{ $genre->genre_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
         </div>
         @include ('layouts.movies')
-        
+
         @if (Auth::check() && Auth::user()->name == 'admin')
 
             <a href="{{ route('movies.create') }}" class="btn btn-primary">Add Movie</a>
