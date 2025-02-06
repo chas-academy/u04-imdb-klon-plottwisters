@@ -15,7 +15,7 @@
             <div x-data="{ showPicture: false }">
                 <!-- Toggle Button -->
                 <x-primary-button @click="showPicture = !showPicture"
-                    class="bg-blue-500 text-white px-4 py-2 rounded-md my-4">
+                    class="bg-blue-500 px-4 py-2 rounded-md my-4">
                     Edit Profile Picture
                 </x-primary-button>
                 <div x-show="showPicture" class="mt-4" x-transition>
