@@ -114,6 +114,10 @@ Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])
 ->middleware(['auth', 'verified'])
 ->name('genre.destroy');
 
+Route::post('/profile/update-picture', [ProfileController::class, 'updatePicture'])
+->middleware(['auth', 'verified'])
+->name('profile.update-picture');
+
 
 
 
