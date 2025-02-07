@@ -11,14 +11,17 @@
             
                 <div class="flex flex-col">
                     @if (Auth::check())
-                    <a href="{{ route('movies.show', [$movie->id, 'create'] )}}" name ="createReview" value="true" class="inline-flex items-center w-xl px-3 py-2 bg-teal-700 border border-transparent rounded-xl font-semibold text-xs text-black uppercase">Leave a review</a>
+                    <x-primary-a :href="route('movies.show', [$movie->id, 'create'] )" :active="request()->routeIs('movies.show', [$movie->id, 'create'] )">
+                        {{ __('Leave a review') }}
+                    </x-primary-a>
                     @endif
                     {{-- <a href="{{ route('reviews', $movie->id)}}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">See all reviews</a> --}}
                 </div>
-
-        @if (request()->has('create'))
-        @include ('layouts.review_create')
-        @endif
+                <div>
+                    @if (request()->has('create'))
+                    @include ('layouts.review_create')
+                    @endif
+                </div>
             </div>
         </div>
         <div class="flex flex-col w-2/3 mx-auto items-center">
