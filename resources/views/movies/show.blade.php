@@ -27,6 +27,9 @@
         <div class="flex flex-col w-2/3 mx-auto items-center">
             <iframe width="560" height="315" src="{{ $movie->trailer_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             {{-- Route to store into watchlist, right now its set to home because missing controller for watchlist --}}
+            <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+                {{ __('Add to watchlist') }}
+            </x-primary-a>
             <a href="{{ route('home', $movie->id) }}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to watchlist</a>
             <p class="text-white">{{ $movie->description }}</p>
             @foreach ($reviews as $review)
