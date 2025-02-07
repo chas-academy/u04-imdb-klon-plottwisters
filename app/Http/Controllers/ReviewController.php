@@ -6,33 +6,48 @@ use App\Models\Review;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class ReviewController extends Controller
 {
-    // Create review
+        /**
+     * Show the form for creating a new resource.
+     */
+    // public function create(): View
+    // {
+    //    return view('movies.show');
+    // }
 
+    // Create review
     public function store(Request $request, Movie $movie)
     {
-        $validated = $request->validate([
-            'review' => 'required|string|max:1000',
-        ]);
 
+        $request->validate([
+            'title' => 'required|string|max:1000',
+            'description' => 'required|string|max:4000',
+        ]);
+       
         Review::create([
             'user_id' => Auth::id(),
             'movie_id' => $movie->id,
-            'review' => $validated['review'],
-        ]);
+            'title' => $request->title,
+            'description' => $request->description,
 
-        return redirect()->route('home'); // might have to change redirects
+        ]);
+dump($movie->id);
+        return redirect()->route('movies.show'); // might have to change redirects
     }
 
     // Show reviews
 
     public function index(Movie $movie)
     {
-        $review = Review::where('movie_id', $movie->id)->latest()->get();
 
-        return response()->json($review);
+        $reviews = Review::where('movie_id', $movie->id)->latest()->get();
+        dump($reviews);
+        // return response()->json($reviews);
+        
+        return view('review', compact('reviews'));
     }
 
     // Update
