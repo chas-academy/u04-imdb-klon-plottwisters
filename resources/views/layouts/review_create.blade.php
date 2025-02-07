@@ -7,7 +7,7 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
-<div class="w-2/4 mx-auto absolute inset-0 top-16 px-8 bg-gray-200 h-fit mb-8">
+<div class="w-2/4 mx-auto absolute inset-0 top-16 px-8 bg-gray-200 h-fit pb-8">
     <div class="mt-8 flex place-content-between">
         <img src="{{$movie->image_url}}" alt="">
         <a href="{{ route('movies.show', $movie->id) }}">X</a>

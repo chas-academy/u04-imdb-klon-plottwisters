@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MovieController extends Controller
 {
@@ -41,15 +42,20 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
         // Validate the incoming request
-        $request->validate([
+
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'trailer_url' => 'nullable|url',
             'image_url' => 'nullable|url',
             'director_name' => 'nullable|string|max:255',
         ]);
-
+        if ($validator->fails()) {
+            return redirect('/')
+                        ->withErrors($validator, 'addmovie');
+                        
+        }
         // Create a new movie
         Movie::create([
             'title' => $request->title,
@@ -60,7 +66,7 @@ class MovieController extends Controller
         ]);
 
         // Redirect to the movies list with success message
-        return redirect()->route('/')->with('success', 'Movie added successfully!');
+        return redirect()->route('home')->with('success', 'Movie added successfully!');
     }
 
     /**

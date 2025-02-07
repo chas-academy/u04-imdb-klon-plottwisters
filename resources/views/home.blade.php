@@ -28,14 +28,22 @@
                     <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Edit featured movie') }}
                     </x-primary-a>
-                    <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+                    <x-primary-a :href="route('home', 'addmovie')" :active="request()->routeIs('movies.create')">
                         {{ __('Add movie') }}
                     </x-primary-a>
+                    @if (request()->has('addmovie'))
+                    @include ('layouts.addmovie')
+                    @endif
+                    <div>
+                    @if($errors->addmovie)
+                    <p>{{$errors->addmovie->first()}}</p>
+                   </div>
+                    @endif
                 @endif
             </div>
         </div>
 
-        <div class="w-2/3 mx-auto">
+        <div class="w-2/3 mx-auto mb-8">
             <form action="{{ route('home') }}" method="GET">
                     <select class="rounded-md" name="genre" onchange="this.form.submit()">
                         <option value="">All Genres</option>

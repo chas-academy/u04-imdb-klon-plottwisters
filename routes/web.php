@@ -48,7 +48,8 @@ Route::get('/movies/create', [MovieController::class, 'create'])
 ->name('movies.create');
 
 Route::post('/movies', [MovieController::class, 'store'])
-->middleware(['auth', 'verified']);
+->middleware(['auth', 'verified'])
+->name('movies.store');
 
 Route::get('/movies/{movie}', [MovieController::class, 'show'])
 ->name('movies.show');
@@ -69,6 +70,12 @@ Route::get('/movies/{id}/reviews', function() {
     $movies = Movie::all();
     return view('movies.reviews');
 })->middleware(['auth', 'verified'])->name('reviews');
+
+Route::post('/addmovie', [MovieController::class, 'store'])
+->middleware(['auth', 'verified'])
+->name('movies.store');
+
+
 
 // Route::get('/movies/{id}/review/create', function() {
 //     $movies = Movie::all();
