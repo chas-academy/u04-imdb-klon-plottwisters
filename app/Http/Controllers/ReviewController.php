@@ -44,10 +44,10 @@ class ReviewController extends Controller
     {
 
         $reviews = Review::where('movie_id', $movie->id)->latest()->get();
-        dump($reviews);
+        $movie = $movie;
         // return response()->json($reviews);
         
-        return view('review', compact('reviews'));
+        return view('movies.show', compact('reviews', 'movie'));
     }
 
     // Update

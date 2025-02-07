@@ -11,7 +11,7 @@
                 @if (Auth::check())
                 <a href="{{ route('movies.show', [$movie->id, 'create'] )}}" name ="createReview" value="true"class ="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Leave a review</a>
                 @endif
-                <a href="{{ route('reviews', $movie->id)}}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">See all reviews</a>
+                {{-- <a href="{{ route('reviews', $movie->id)}}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">See all reviews</a> --}}
             </div>
             @if (request()->has('create'))
             @include ('layouts.review_create')
@@ -22,21 +22,14 @@
             {{-- Route to store into watchlist, right now its set to home because missing controller for watchlist --}}
             <a href="{{ route('home', $movie->id) }}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to watchlist</a>
             <p class="text-white">{{ $movie->description }}</p>
-            {{-- @foreach ($reviews as $review) --}}
-            <div class="bg-white w-full mx-auto items-center mt-4">
-                <p class="text-center">PLACE FOR REVIEWS</p>
-                <br><br><br>
-                <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a>
+            @foreach ($reviews as $review)
+            <div class="bg-white w-full mx-auto items-center mt-4 rounded-md">
+                <p class="text-center font-bold mt-4">{{$review->title}}</p>
+                <p class="text-center">{{$review->description}}</p>
+                {{-- <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a> --}}
             </div>
-            {{-- @endforeach --}}
-            <div class="bg-white w-full mx-auto items-center mt-4">
-                <p class="text-center">PLACE FOR REVIEWS</p>
-                <br><br><br>
-            </div>
-            <div class="bg-white w-full mx-auto items-center mt-4">
-                <p class="text-center">PLACE FOR REVIEWS</p>
-                <br><br><br>
-            </div>
+            @endforeach
+
         </div>
     </div>
 </x-head-layout>

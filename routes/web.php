@@ -78,9 +78,9 @@ Route::get('/movies/{id}/reviews', function() {
 
 //#################### REVIEWS ##################
 
-Route::get('/movies/{movie}/reviews', [ReviewController::class, 'index'])
+Route::get('/movies/{movie}', [ReviewController::class, 'index'])
 ->middleware(['auth', 'verified'])
-->name('reviews');
+->name('movies.show');
 
 Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
 ->middleware(['auth', 'verified'])
