@@ -34,8 +34,8 @@ class ReviewController extends Controller
             'description' => $request->description,
 
         ]);
-dump($movie->id);
-        return redirect()->route('movies.show'); // might have to change redirects
+
+        return redirect()->route('movies.show', $movie->id); // might have to change redirects
     }
 
     // Show reviews
