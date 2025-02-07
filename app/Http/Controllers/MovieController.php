@@ -115,7 +115,7 @@ class MovieController extends Controller
     {
         // Delete the movie
         $movie->delete();
-
+     
         // Redirect to the movies list with success message
         return redirect()->route('home')->with('success', 'Movie deleted successfully!');
     }

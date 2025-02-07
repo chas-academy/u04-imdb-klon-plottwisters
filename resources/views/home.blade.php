@@ -23,10 +23,18 @@
         <div class="flex flex-1 items-start w-fit m-4 flex-col mx-auto">
             <h2 class="text-white font-bold text-3xl">Featured movie</h2>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/LNlrGhBpYjc?si=2eNr-AiXiSOwc5xG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            @if (Auth::check() && Auth::user()->name == 'admin')
-            <a class="text-white" href="" class="btn btn-warning">Edit</a>
-            @endif
+            <div class="flex w-full justify-end gap-4 mt-4">
+                @if (Auth::check() && Auth::user()->name == 'admin')
+                    <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Edit featured movie') }}
+                    </x-primary-a>
+                    <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Add movie') }}
+                    </x-primary-a>
+                @endif
+            </div>
         </div>
+
         <div class="w-2/3 mx-auto">
             <form action="{{ route('home') }}" method="GET">
                     <select class="rounded-md" name="genre" onchange="this.form.submit()">
@@ -42,10 +50,6 @@
         </div>
         @include ('layouts.movies')
 
-        @if (Auth::check() && Auth::user()->name == 'admin')
 
-            <a href="{{ route('movies.create') }}" class="btn btn-primary">Add Movie</a>
-
-        @endif
         {{ $movies->links() }}
     </body>
