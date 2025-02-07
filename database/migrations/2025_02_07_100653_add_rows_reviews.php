@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('reviews', function (Blueprint $table) {
             $table->string('title')->after('id');
-            $table->string('description')->after('title');
+            $table->text('description')->after('title');
         });
     }
 
