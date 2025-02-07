@@ -22,5 +22,16 @@ class MovieSeeder extends Seeder
         Genre::factory()->create(
             ['genre_name' => 'Family']
         );
+        Genre::factory()->create(
+            ['genre_name' => 'Action']
+        );
+        Genre::factory()->create(
+            ['genre_name' => 'Drama']
+        );
+        Genre::factory()->create(
+            ['genre_name' => 'Comedy']
+        );
+
+        Movie_genre::factory()->count(20)->create();
     }
 }
