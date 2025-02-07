@@ -7,9 +7,10 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
-<div class="w-2/4 mx-auto absolute inset-0 px-8 bg-gray-200">
-    <div class="mt-8">
-        <img src="{{-- {{$movie->image_url}} --}} https://posters.movieposterdb.com/22_01/2021/8721424/t_8721424_ac84bfc0.jpg" alt="">
+<div class="w-2/4 mx-auto absolute inset-0 px-8 bg-gray-200 h-fit mb-8">
+    <div class="mt-8 flex place-content-between">
+        <img src="{{$movie->image_url}}" alt="">
+        <a href="{{ route('movies.show', $movie->id) }}">X</a>
     </div>
 
         <form class="flex flex-col gap-4" action="{{ route('reviews', $movie->id)}}" method="POST">

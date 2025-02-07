@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\Movie_genre;
+use App\Models\Review;
 use Database\Factories\Movie_GenreFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -35,5 +36,7 @@ class MovieSeeder extends Seeder
         );
 
         Movie_genre::factory()->count(20)->create();
+        
+        Review::factory()->count(5)->create();
     }
 }
