@@ -18,7 +18,7 @@ class MovieFactory extends Factory
     {
         return [
             'title' => ucfirst(fake()->word()),
-            'description' => fake()->realText($maxNbChars = 200, $indexSize = 2),
+            'description' => fake()->text($maxNbChars = 300),
             'trailer_url' => 'https://youtu.be/YJserno8tyU?si=VBNT6UkTRKbAs6TW',
             'image_url' => 'https://posters.movieposterdb.com/22_01/2021/8721424/t_8721424_ac84bfc0.jpg',
             'director_name' => fake()->name()

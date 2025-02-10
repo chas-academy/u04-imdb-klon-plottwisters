@@ -1,13 +1,15 @@
 <div class="flex flex-col flex-1 items-center m-4">
     {{-- <p>{{ $movie['title'] }}</p> --}}
 
-    <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info"><img src="{{ $movie->image_url}}" alt=""></a>
+    <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info w-[200px] h-[300px]"><img src="{{ $movie->image_url}}" alt=""></a>
     <div class="flex flex-row items-center">
         {{-- Add function for rating --}}
         <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p>
     </div>
     {{-- Route to store into watchlist, right now its set to home because missing controller for watchlist --}}
-    <a href="{{ route('home', $movie->id) }}" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to watchlist</a>
+    <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+        {{ __('Add to watchlist') }}
+    </x-primary-a>
 
 {{-- @if (Auth::check() && Auth::user()->name == 'admin')
 <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
