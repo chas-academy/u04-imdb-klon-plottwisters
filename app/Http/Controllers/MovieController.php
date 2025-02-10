@@ -25,7 +25,7 @@ class MovieController extends Controller
         }
 
         $genres = Genre::all(); // Fetch all available genres
-        return view('home', compact('movies','genres', 'selectedGenre' ));
+        return view('home', compact('movies', 'genres', 'selectedGenre'));
     }
 
     /**
@@ -43,7 +43,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-        // Validate the incoming request
+            // Validate the incoming request
 
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -53,8 +53,7 @@ class MovieController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect('/')
-                        ->withErrors($validator, 'addmovie');
-                        
+                ->withErrors($validator, 'addmovie');
         }
         // Create a new movie
         Movie::create([
@@ -121,8 +120,18 @@ class MovieController extends Controller
     {
         // Delete the movie
         $movie->delete();
-     
+
         // Redirect to the movies list with success message
         return redirect()->route('home')->with('success', 'Movie deleted successfully!');
+    }
+
+    // Searching
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        $movies = Movie::where('title', 'like', "%{query}%")->get();
+
+        return view('movies.search-results', compact('movies'));
     }
 }
