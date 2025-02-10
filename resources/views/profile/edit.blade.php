@@ -105,7 +105,7 @@
                     <div x-show="selectedWatchlist == {{ $watchlist->id }}" class="p-4 mt-4">
                         <ul class="flex flex-row flex-wrap">
                             @foreach ($watchlist->movies as $movie)
-                                <li class="flex justify-between my-2 text-white">
+                                <li class="flex justify-between my-2 text-white flex-col text-center pr-4">
                                     <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">
                                         <img src="{{ $movie->image_url }}" alt="" >
                                         {{ $movie->title }}
