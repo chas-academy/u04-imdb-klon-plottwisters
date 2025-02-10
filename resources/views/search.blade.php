@@ -3,6 +3,7 @@
     <div class="container mx-auto mt-6">
         <x-searchbar></x-searchbar>
         <h2 class="text-white">Search results for: {{ $query }}</h2>
+        
         @include ('layouts.movies')
         <div class="w-40 h-40 flex flex-wrap">
             

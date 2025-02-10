@@ -4,7 +4,9 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
+use App\Http\Controllers\ReviewController;
 use App\Models\Movie;
+use App\Models\Review;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,7 +38,7 @@ Route::controller(MovieController::class)->group(function () {
 
 
 
-//####################MOVIE##################
+//#################### MOVIE ##################
 
 Route::get('/movies', [MovieController::class, 'index'])
 ->middleware(['auth', 'verified'])
@@ -47,10 +49,10 @@ Route::get('/movies/create', [MovieController::class, 'create'])
 ->name('movies.create');
 
 Route::post('/movies', [MovieController::class, 'store'])
-->middleware(['auth', 'verified']);
+->middleware(['auth', 'verified'])
+->name('movies.store');
 
 Route::get('/movies/{movie}', [MovieController::class, 'show'])
-->middleware(['auth', 'verified'])
 ->name('movies.show');
 
 Route::get('/movies/{movie}/edit', [MovieController::class, 'edit'])
@@ -70,11 +72,27 @@ Route::get('/movies/{id}/reviews', function() {
     return view('movies.reviews');
 })->middleware(['auth', 'verified'])->name('reviews');
 
-//#################### TEST ##################
+Route::post('/addmovie', [MovieController::class, 'store'])
+->middleware(['auth', 'verified'])
+->name('movies.store');
 
-Route::get('/review', function() {
-    return view('reviews.create');
-});
+
+
+// Route::get('/movies/{id}/review/create', function() {
+//     $movies = Movie::all();
+//     return view('movies.show');
+// })->middleware(['auth', 'verified'])->name('createReview');
+
+
+//#################### REVIEWS ##################
+
+Route::get('/movies/{movie}', [ReviewController::class, 'index'])
+->middleware(['auth', 'verified'])
+->name('movies.show');
+
+Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
+->middleware(['auth', 'verified'])
+->name('reviews');
 
 Route::get('/admin/editUser', function() {
     return view('admin.edit');

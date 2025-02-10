@@ -1,9 +1,10 @@
-<div class="flex flex-row flex-wrap w-2/3 mx-auto">
+<div class="flex flex-row flex-wrap w-2/3 mx-auto gap-8">
     @foreach ($movies as $movie)
         <div class="flex flex-col flex-1 items-center m-4">
             <p class="text-white">{{ $movie['title'] }}</p>
+
             <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">
-                <img src="{{ $movie->image_url}}" alt="">
+                <img class="w-[100px] h-[150px]" src="{{ $movie->image_url}}" alt="">
             </a>
                {{-- Add function for rating --}}
             <div class="flex flex-row items-center">
@@ -33,7 +34,6 @@
                                     <option value="{{ $watchlist->id }}">{{ $watchlist->watchlist_name }}</option>
                                 @endforeach
                             </select>
-
                             <x-primary-button type="submit">Add to Watchlist</x-primary-button>
                         </form>
                     </div>
