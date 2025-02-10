@@ -25,16 +25,18 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/LNlrGhBpYjc?si=2eNr-AiXiSOwc5xG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <div class="flex w-full justify-end gap-4 mt-4">
                 @if (Auth::check() && Auth::user()->name == 'admin')
-                    <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+                    <x-primary-a :href="route('home', 'editfeat')" :active="request()->routeIs('edit.trailer')">
                         {{ __('Edit featured movie') }}
                     </x-primary-a>
                     <x-primary-a :href="route('home', 'addmovie')" :active="request()->routeIs('movies.create')">
                         {{ __('Add movie') }}
                     </x-primary-a>
                     @if (request()->has('addmovie'))
-                    @include ('layouts.addmovie')
+                      @include ('layouts.addmovie')
                     @endif
-
+                    @if (request()->has('editfeat'))
+                      @include ('layouts.edit-trailer')
+                    @endif
                 @endif
             </div>
         </div>
