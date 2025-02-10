@@ -22,7 +22,6 @@
 
 <body class="bg-[#1E1E1E]">
     @include ('layouts.navigation')
-    @include ('components.searchbar')
     {{$slot}}
 </body>
 

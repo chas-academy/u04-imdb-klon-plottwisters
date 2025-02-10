@@ -1,4 +1,4 @@
-<x-head-layout>
+<!-- <x-head-layout>
     <body class="bg-gray-800">
     <div class="container mx-auto mt-6">
         <x-searchbar></x-searchbar>
@@ -21,4 +21,4 @@
     @endif
 </div>
 </body>
-</x-head-layout>
+</x-head-layout> -->
