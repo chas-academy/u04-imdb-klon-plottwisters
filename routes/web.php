@@ -3,6 +3,7 @@
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WatchlistController;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
@@ -119,6 +120,21 @@ Route::post('/profile/update-picture', [ProfileController::class, 'updatePicture
 ->name('profile.update-picture');
 
 
+ //####################Watchlist##################
+Route::middleware(['auth'])->group(function () {
+
+
+    Route::post('/watchlists', [WatchlistController::class, 'store'])->name('watchlists.store');
+    Route::get('/watchlists/create', [WatchlistController::class, 'create'])->middleware('auth')->name('watchlists.create');
+    Route::get('/watchlists', [WatchlistController::class, 'index'])->middleware('auth')->name('watchlists.index');
+    Route::get('/watchlists/{watchlist}', [WatchlistController::class, 'show'])->name('watchlists.show');
+    Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
+
+    Route::delete('/watchlists/{watchlist}', [WatchlistController::class, 'delete'])->name('watchlists.delete');
+    Route::post('/watchlists/movies', [WatchlistController::class, 'addMovie'])->name('watchlists.addMovie');
+    Route::delete('/watchlists/{watchlist}/movies/{movie}', [WatchlistController::class, 'removeMovie'])
+        ->name('watchlists.removeMovie');
+});
 
 
 require __DIR__.'/auth.php';
