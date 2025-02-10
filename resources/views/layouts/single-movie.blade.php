@@ -14,12 +14,11 @@
         @else
             {{-- Add to Watchlist Button --}}
             <x-primary-button 
-                @click="showWatchlistDropdown = !showWatchlistDropdown" 
-                class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold mt-4">
+                @click="showWatchlistDropdown = !showWatchlistDropdown" >
                 Add to Watchlist
             </x-primary-button>
             <div x-show="showWatchlistDropdown" x-transition class="mt-4">
-                <form action="{{ route('watchlists.addMovie') }}" method="POST">
+                <form action="{{ route('watchlists.addMovie') }}" method="POST" class="flex flex-col">
                     @csrf
                     <input type="hidden" name="movie_id" value="{{ $movie->id }}">
 
@@ -31,7 +30,7 @@
                         @endforeach
                     </select>
 
-                    <x-primary-button type="submit" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to Watchlist</x-primary-button>
+                    <x-primary-button type="submit">Add to Watchlist</x-primary-button>
                 </form>
             </div>
         @endif
