@@ -34,15 +34,15 @@
                     @if (request()->has('addmovie'))
                     @include ('layouts.addmovie')
                     @endif
-                    <div>
-                    @if($errors->addmovie)
-                    <p>{{$errors->addmovie->first()}}</p>
-                   </div>
-                    @endif
+
                 @endif
             </div>
         </div>
-
+        <div class="bg-[#F15C5F] items-center justify-center flex rounded-md w-2/3 mx-auto">
+            @if($errors->addmovie)
+            <p>{{$errors->addmovie->first()}}</p>
+            @endif
+       </div>
         <div class="w-2/3 mx-auto mb-8">
             <form action="{{ route('home') }}" method="GET">
                     <select class="rounded-md" name="genre" onchange="this.form.submit()">

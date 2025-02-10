@@ -8,7 +8,7 @@
             {{-- <p class="text-white">{{ $movie->director_name }}</p> --}}
             <div class="flex flex-col">
                 @if (Auth::check())
-                <a href="{{ route('movies.show', [$movie->id, 'create'] )}}" name ="createReview" value="true"class ="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Leave a review</a>
+                <a href="{{ route('movies.show', [$movie->id, 'create'] )}}" name ="createReview" value="true"class ="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold ">Leave a review</a>
                 @endif
 
                 <a href="" class="btn btn-info bg-[#20C8A6] w-40 text-center rounded-md font-bold">Add to watchlist</a>
