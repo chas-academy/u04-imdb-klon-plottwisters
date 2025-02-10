@@ -11,6 +11,7 @@
                 <p class="text-[#A693FF]">3.1</p>
             </div>
              {{-- Add Movie to Watchlist Section --}}
+             @auth
             <div x-data="{ showWatchlistDropdown: false, noWatchlists: {{ Auth::user()->watchlists->isEmpty() ? 'true' : 'false' }} }">
                 {{-- Check if user has watchlists --}}
                 @if (Auth::user()->watchlists->isEmpty())
@@ -38,7 +39,8 @@
                     </div>
                 @endif
             </div>
-
+            @endauth
+            
         
           {{-- @if (Auth::check() && Auth::user()->name == 'admin')
             <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
