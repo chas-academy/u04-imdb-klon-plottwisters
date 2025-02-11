@@ -16,8 +16,13 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
+    $user = $request->user();
+
+    $watchlists = $user->watchlists; 
         return view('profile.edit', [
             'user' => $request->user(),
+            'watchlists' => $watchlists,
         ]);
     }
 
