@@ -45,12 +45,15 @@
           {{-- @if (Auth::check() && Auth::user()->name == 'admin')
             <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 
-            <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
-                @csrf
-                @method('DELETE')
-                <button class="text-white" type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
-            </form>
-            @endif --}}
-        </div>
+        <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
+            @csrf
+            @method('DELETE')
+            <button class="text-white" type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
+        </form>
+        @endif --}}
+
+        @include('components.rating', ['movie'=>$movie])
+
+    </div>
     @endforeach
 </div>

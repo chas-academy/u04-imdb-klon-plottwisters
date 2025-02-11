@@ -15,8 +15,7 @@ class RatingController extends Controller
     public function store(Request $request, Movie $movie)
     {
         $validated = $request->validate([
-            'score' => 'required|integer|between:1,10',
-            'review' => 'nullable|string|max:1000',
+            'rating' => 'required|integer|between:1,10',
         ]);
 
         // Check if user has rated movie
@@ -31,14 +30,14 @@ class RatingController extends Controller
             Rating::create([
                 'user_id' => Auth::id(),
                 'movie_id' => $movie->id,
-                'score' => $validated['score'],
+                'rating' => $validated['rating'],
                 'review' => $validated['review'] ?? null,
             ]);
             $message = 'Rating added successfully';
         }
 
         // Update average rating
-        $avgRating = Rating::where('movie_id', $movie->id)->avg('score');
+        $avgRating = Rating::where('movie_id', $movie->id)->avg('rating');
         $movie->update(['average_rating' => round($avgRating, 1)]);
 
         return redirect()->route('home');
