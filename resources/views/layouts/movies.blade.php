@@ -1,6 +1,6 @@
-<div class="flex flex-row flex-wrap w-2/3 mx-auto gap-8">
+<div class="aspect-6/2 flex flex-row flex-wrap md:w-2/3 mx-auto gap-4 md:gap-8">
     @foreach ($movies as $movie)
-        <div class="flex flex-col flex-1 items-center m-4 gap-2">
+        <div class=" flex flex-col flex-1 items-center m-4 gap-2">
             <p class="text-white">{{ $movie['title'] }}</p>
 
             <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">

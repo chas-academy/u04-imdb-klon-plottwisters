@@ -1,9 +1,13 @@
 <x-head-layout>
         {{-- @include ('layouts.navigation') --}}
+                    <!-- Searchbar -->
+                    <div class="md:hidden flex justify-center items-center py-2">
+                        @include('components.searchbar')
+                    </div>
         <div class="flex flex-1 items-start w-fit m-4 flex-col mx-auto">
             <h2 class="text-white font-bold text-3xl">Featured movie</h2>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/LNlrGhBpYjc?si=2eNr-AiXiSOwc5xG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <div class="flex w-full justify-end gap-4 mt-4">
+            {{-- <iframe class="aspect-video" width="560" height="315" src="https://www.youtube.com/embed/LNlrGhBpYjc?si=2eNr-AiXiSOwc5xG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> --}}
+            <div class="flex aspect-3/2 mx-auto sm:w-full justify-center gap-4 mt-4">
                 @if (Auth::check() && Auth::user()->name == 'admin')
                     <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Edit featured movie') }}
