@@ -143,7 +143,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/watchlists', [WatchlistController::class, 'store'])->name('watchlists.store');
     Route::get('/watchlists/create', [WatchlistController::class, 'create'])->middleware('auth')->name('watchlists.create');
-    Route::get('/watchlists', [WatchlistController::class, 'index'])->middleware('auth')->name('watchlists.index');
+    Route::get('/watchlists', [WatchlistController::class, 'index'])->middleware(['auth', 'verified'])->name('watchlists.index');
     Route::get('/watchlists/{watchlist}', [WatchlistController::class, 'show'])->name('watchlists.show');
     // Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
 

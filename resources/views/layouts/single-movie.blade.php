@@ -7,6 +7,7 @@
         <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p>
     </div>
    {{-- Add Movie to Watchlist Section --}}
+@auth
     <div x-data="{ showWatchlistDropdown: false, noWatchlists: {{ Auth::user()->watchlists->isEmpty() ? 'true' : 'false' }} }">
         {{-- Check if user has watchlists --}}
         @if (Auth::user()->watchlists->isEmpty())
@@ -35,6 +36,10 @@
             </div>
         @endif
     </div>
+@endauth
+@if (!Auth::check())
+<p class="text-white mt-2 w-[220px] text-center">Login to create a watchlist.</p>
+@endif
 {{-- @if (Auth::check() && Auth::user()->name == 'admin')
 <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 

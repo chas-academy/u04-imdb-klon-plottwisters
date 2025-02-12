@@ -1,6 +1,6 @@
 <div class="flex flex-row flex-wrap w-2/3 mx-auto gap-8">
     @foreach ($movies as $movie)
-        <div class="flex flex-col flex-1 items-center m-4">
+        <div class="flex flex-col flex-1 items-center m-4 gap-2">
             <p class="text-white">{{ $movie['title'] }}</p>
 
             <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">
@@ -12,7 +12,10 @@
                 <p class="text-[#A693FF]">3.1</p>
             </div>
              {{-- Add Movie to Watchlist Section --}}
-             @auth
+            @if (!Auth::check())
+                <p class="inline-flex items-center w-xl px-3 py-2 bg-teal-700 border border-transparent rounded-xl font-semibold text-xs text-black uppercase w-[150px] text-center">Login to create a watchlist.</p>
+            @endif
+            @auth
             <div x-data="{ showWatchlistDropdown: false, noWatchlists: {{ Auth::user()->watchlists->isEmpty() ? 'true' : 'false' }} }">
                 {{-- Check if user has watchlists --}}
                 @if (Auth::user()->watchlists->isEmpty())
