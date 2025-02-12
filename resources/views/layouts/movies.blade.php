@@ -44,8 +44,7 @@
                 @endif
             </div>
             @endauth
-            
-        
+
           {{-- @if (Auth::check() && Auth::user()->name == 'admin')
             <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 
@@ -55,10 +54,6 @@
                 <button class="text-white btn btn-delete" type="submit" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
             </form>
         @endif--}}
-
-        
-       
-
     </div>
     @endforeach
 </div>
