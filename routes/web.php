@@ -87,7 +87,6 @@ Route::post('/addmovie', [MovieController::class, 'store'])
 //#################### REVIEWS ##################
 
 Route::get('/movies/{movie}', [ReviewController::class, 'index'])
-    ->middleware(['auth', 'verified'])
     ->name('movies.show');
 
 Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
