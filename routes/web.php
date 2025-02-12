@@ -5,6 +5,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\RatingController;
 use App\Models\Movie;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,8 @@ Route::get('/movies/{id}/reviews', function () {
 Route::post('/addmovie', [MovieController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('movies.store');
+
+Route::post('/movies/{movie}/rate', [RatingController::class, 'store'])->name('ratings.store');
 
 
 
