@@ -1,7 +1,5 @@
 <div class="flex flex-row flex-wrap w-2/3 mx-auto gap-8">
     @foreach ($movies as $movie)
-<div class="flex flex-row flex-wrap w-2/3 mx-auto gap-8">
-    @foreach ($movies as $movie)
     <div class="flex flex-col flex-1 items-center m-4">
         <p class="text-white">{{ $movie['title'] }}</p>
 
@@ -53,21 +51,6 @@
                 <button class="text-white btn btn-delete" type="submit" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
             </form>
         @endif
-
-        @include('components.rating', ['movie'=>$movie])
-
-    </div>
-    @endforeach
-</div>
-
-            <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
-
-        <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
-            @csrf
-            @method('DELETE')
-            <button class="text-white" type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
-        </form>
-        @endif --}}
 
         @include('components.rating', ['movie'=>$movie])
 
