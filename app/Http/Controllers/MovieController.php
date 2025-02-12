@@ -19,7 +19,7 @@ class MovieController extends Controller
         if ($selectedGenre) {
             $movies = Movie::whereHas('genres', function ($query) use ($selectedGenre) {
                 $query->where('id', $selectedGenre);
-            })->paginate(18);
+            })->paginate(20);
         } else {
             $movies = Movie::paginate(18);
         }

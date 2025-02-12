@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
+    protected $policies = [
+    Watchlist::class => WatchlistPolicy::class,
+    ];
+
+
     /**
      * Bootstrap any application services.
      */
