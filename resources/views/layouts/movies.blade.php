@@ -7,9 +7,10 @@
                 <img class="w-[100px] h-[150px]" src="{{ $movie->image_url}}" alt="">
             </a>
                {{-- Add function for rating --}}
-            <div class="flex flex-row items-center">
-                <img src="{{ Storage::url('images/star.png')}}" alt="">
-                <p class="text-[#A693FF]">3.1</p>
+            <div>
+                {{-- <img src="{{ Storage::url('images/star.png')}}" alt=""> --}}
+                {{-- <p class="text-[#A693FF]">3.1</p> --}}
+                @include('components.rating', ['movie'=>$movie])
             </div>
              {{-- Add Movie to Watchlist Section --}}
             @if (!Auth::check())
@@ -55,7 +56,8 @@
             </form>
         @endif--}}
 
-        @include('components.rating', ['movie'=>$movie])
+        
+       
 
     </div>
     @endforeach

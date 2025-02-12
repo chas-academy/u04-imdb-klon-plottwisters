@@ -1,6 +1,6 @@
 
 <x-head-layout>
-    <div class="flex flex-row w-2/3 mx-auto mt-10 h-2/3">
+    <div class="flex flex-row w-2/3 mx-auto mt-10 h-2/3 pb-20">
         <div>
             @include ('layouts.single-movie')
             @include ('layouts.ratethefilm')
@@ -23,7 +23,6 @@
 
         <div class="flex flex-col w-2/3 mx-auto items-center gap-4">
             <iframe width="560" height="315" src="{{ $movie->trailer_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
             <div class="flex w-full justify-end gap-4 mt-4">
                 @if (Auth::check() && Auth::user()->name == 'admin')
                     <x-primary-a :href="route('movies.show', [$movie->id, 'edit'])" :active="request()->routeIs('movies.create')">
