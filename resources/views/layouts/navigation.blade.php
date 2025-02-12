@@ -55,11 +55,9 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('home')">
+                        {{-- <x-dropdown-link :href="route('home')">
                             {{ __('Watchlist') }}
-                        </x-dropdown-link>
-
-
+                        </x-dropdown-link> --}}
                         @if (Auth::check() && Auth::user()->name == 'admin')
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Admin') }}

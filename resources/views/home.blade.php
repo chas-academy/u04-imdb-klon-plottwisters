@@ -38,6 +38,7 @@
         </div>
         @include ('layouts.movies')
 
-
+        <div class="pb-20">
         {{ $movies->links() }}
+    </div>
 </x-head-layout>

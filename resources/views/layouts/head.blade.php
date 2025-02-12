@@ -20,7 +20,7 @@
     @endif
 </head>
 
-<body class="bg-[#1E1E1E]">
+<body class="bg-[#1E1E1E] h-full">
     @include ('layouts.navigation')
     {{$slot}}
     <footer>
@@ -31,5 +31,4 @@
         </div> --}}
     </footer>
 </body>
-
 </html>
