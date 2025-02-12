@@ -24,6 +24,8 @@ class MovieController extends Controller
             $movies = Movie::paginate(18);
         }
 
+        $featuredMovie = Movie::where('is_featured', true)->first();
+
         $genres = Genre::all(); // Fetch all available genres
         return view('home', compact('movies', 'genres', 'selectedGenre'));
     }
