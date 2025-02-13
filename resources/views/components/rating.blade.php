@@ -1,8 +1,7 @@
 <div class="flex flex-col items-center space-y-2">
-    <div class="flex flex-row gap-1 items-center">
-        <img src="{{ Storage::url('images/star.png')}}" alt="">
-        <p class="text-[#A693FF]">{{ round($movie->average_rating, 1) }} / 10</p>
-    </div>
+    <p class="text-lg font-semibold text-white">Average Rating: {{ round($movie->average_rating, 1) }} / 10</p>
+
+
     @auth
     @php
     $userRating = ($movie->ratings ?? collect())->where('user_id', auth()->id())->first();
@@ -10,7 +9,9 @@
 
     <form action="{{ route('ratings.store', $movie) }}" method="POST" class="flex items-center space-x-2">
         @csrf
-        <select name="rating" class="p-1 border border-gray-500 rounded bg-white text-black w-[50px]">
+
+        <select name="rating" class="p-1 border border-gray-500 rounded bg-white text-black">
+
             @for ($i = 1; $i <= 10; $i++)
                 <option value="{{ $i }}" {{ $userRating && $userRating->rating == $i ? 'selected' : '' }}>
                 {{ $i }}

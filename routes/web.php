@@ -6,6 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RatingController;
+
+use App\Http\Controllers\AdminController;
+
 use App\Models\Movie;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
@@ -96,6 +99,7 @@ Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('reviews');
 
+
 // Route::get('/admin/editUser', function () {
 //     return view('admin.edit');
 // });
@@ -143,9 +147,9 @@ Route::post('/profile/update-picture', [ProfileController::class, 'updatePicture
     ->name('profile.update-picture');
 
 
- //####################Watchlist##################
+//####################Watchlist##################
 Route::middleware(['auth'])->group(function () {
-
+    
 
     Route::post('/watchlists', [WatchlistController::class, 'store'])->name('watchlists.store');
     Route::get('/watchlists/create', [WatchlistController::class, 'create'])->middleware('auth')->name('watchlists.create');
@@ -157,6 +161,25 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/watchlists/movies', [WatchlistController::class, 'addMovie'])->name('watchlists.addMovie');
     Route::delete('/watchlists/{watchlist}/movies/{movie}', [WatchlistController::class, 'removeMovie'])
         ->name('watchlists.removeMovie');
+});
+
+//#################### ADMIN ##################
+Route::prefix('admin')->middleware('auth')->group(function () {
+    // Users Management Routes
+    Route::get('/users', [AdminController::class, 'usersIndex'])->name('admin.users.index');
+    Route::get('/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::put('/users/{user}/toggle-role', [AdminController::class, 'toggleUserRole'])->name('admin.users.toggleRole');
+
+
+    // Movies Management Routes
+    Route::get('/movies', [AdminController::class, 'moviesIndex'])->name('admin.movies.index');
+    Route::get('/movies/create', [AdminController::class, 'addMovie'])->name('admin.movies.create');
+    Route::post('/movies', [AdminController::class, 'storeMovie'])->name('admin.movies.store');
+    Route::get('/movies/{movie}/edit', [AdminController::class, 'editMovie'])->name('admin.movies.edit');
+    Route::put('/movies/{movie}', [AdminController::class, 'updateMovie'])->name('admin.movies.update');
+    Route::delete('/movies/{movie}', [AdminController::class, 'deleteMovie'])->name('admin.movies.delete');
 });
 
 

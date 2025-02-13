@@ -1,10 +1,10 @@
-<div class="flex flex-col flex-1 items-center m-4">
+<div class="flex flex-col items-center m-4 gap-4">
     <p class=" text-white">{{ $movie['title'] }}</p>
 
     <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info w-[200px] h-[300px]"><img src="{{ $movie->image_url}}" alt=""></a>
     <div class="flex flex-row items-center">
         {{-- Add function for rating --}}
-        <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p>
+        {{-- <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p> --}}
     </div>
    {{-- Add Movie to Watchlist Section --}}
 @auth
