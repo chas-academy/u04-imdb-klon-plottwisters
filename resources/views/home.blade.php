@@ -1,4 +1,5 @@
 <x-head-layout>
+
     <div class="flex flex-1 items-start w-fit m-4 flex-col mx-auto">
         <h2 class="text-white font-bold text-3xl">Featured Movie</h2>
 
@@ -21,6 +22,7 @@
             @if (request()->has('addmovie'))
             @include ('layouts.addmovie')
             @endif
+
             @endif
         </div>
     </div>
@@ -51,4 +53,6 @@
     @include ('layouts.movies')
 
 
+
     {{ $movies->links() }}
+

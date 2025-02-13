@@ -21,7 +21,7 @@ class MovieController extends Controller
                 $query->where('id', $selectedGenre);
             })->paginate(18);
         } else {
-            $movies = Movie::paginate(18);
+            $movies = Movie::paginate(20);
         }
 
         $featuredMovie = Movie::where('is_featured', true)->first() ?? null;

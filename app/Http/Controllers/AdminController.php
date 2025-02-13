@@ -91,16 +91,16 @@ class AdminController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
         ]);
-
+       
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
-        if (!empty($validated['password'])) {
+         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
 
         $user->save();
-
+      
         return redirect()->route('admin.users.index')->with('success', 'User updated.');
     }
 
@@ -110,6 +110,7 @@ class AdminController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User deleted.');
     }
 
+
     public function setFeaturedMovie(Movie $movie)
     {
         Movie::where('is_featured, true')->update(['is_featured' => false]);
@@ -118,4 +119,26 @@ class AdminController extends Controller
 
         return redirect()->back()->with('sucess', 'Featured movie updated.');
     }
+
+    public function usersIndex(Request $request)
+    {
+ 
+        $editingUserId = $request->input('editingUserId');
+
+    
+        $users = User::all();
+
+   
+        return view('admin.users.index', compact('users', 'editingUserId'));
+    }
+
+    public function toggleUserRole(User $user)
+{
+    $user->is_admin = !$user->is_admin;
+    $user->save();
+
+    return redirect()->route('admin.users.index')->with('success', 'User role updated.');
+}
+
+
 }
