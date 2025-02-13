@@ -26,10 +26,7 @@
             @endif
         </div>
     </div>
-</x-head-layout>
-
-
-    {{-- @include ('layouts.navigation') --}}
+        {{-- @include ('layouts.navigation') --}}
 
     </div>
     <div class="bg-[#F15C5F] items-center justify-center flex rounded-md w-2/3 mx-auto">
@@ -51,8 +48,8 @@
         </form>
     </div>
     @include ('layouts.movies')
-
-
-
-    {{ $movies->links() }}
+    <div class="pb-20">
+        {{ $movies->links() }}
+    </div>
+</x-head-layout>
 
