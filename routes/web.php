@@ -109,6 +109,7 @@ Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
 
 
 
+
 //####################GENRE##################
 
 Route::get('/genre', [GenreController::class, 'index'])

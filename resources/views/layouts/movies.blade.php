@@ -56,7 +56,7 @@
         </form>
         @endif --}}
 
-        @include('components.rating', ['movie'=>$movie])
+        {{-- @include('components.rating', ['movie'=>$movie]) --}}
 
     </div>
     @endforeach
