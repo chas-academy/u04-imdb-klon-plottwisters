@@ -1,11 +1,14 @@
 
 <x-head-layout>
-    <div class="flex flex-row w-2/3 mx-auto mt-10 h-2/3 pb-20">
-        <div>
+    <div class="lg:flex flex-row lg:w-3/4 mx-auto mt-10 h-2/3 pb-20">
+        <div class="flex w-2/3 lg:w-auto mx-auto lg:block justify-around">
             @include ('layouts.single-movie')
-            @include ('layouts.ratethefilm')
-            <div class="flex flex-col gap-4 mt-4">
-                <p class="text-white">Rate the film</p>
+            {{-- @include ('layouts.ratethefilm') --}}
+            <div class="flex flex-col w-48 mx-auto gap-4 mt-4">
+                {{-- @include ('layouts.ratethefilm') --}}
+                @include('components.rating', ['movie'=>$movie])
+
+                {{-- <p class="text-white">Rate the film</p> --}}
                 <p class="text-[#A693FF]">Director:</p>
                 <p class="text-white">{{ $movie->director_name }}</p>
             
