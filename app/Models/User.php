@@ -22,7 +22,16 @@ class User extends Authenticatable
         return $this->hasMany(Watchlist::class, 'user_id');
     }
 
-
+    // Create wathclist so new users always have one
+   protected static function booted()
+    {
+    static::created(function ($user) {
+        Watchlist::create([
+            'watchlist_name' => 'My List',
+            'user_id' => $user->id,
+        ]);
+    });
+    }
 
     /**
      * The attributes that should be hidden for serialization.

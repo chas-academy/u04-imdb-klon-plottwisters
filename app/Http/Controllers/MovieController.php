@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MovieController extends Controller
 {
@@ -20,11 +21,14 @@ class MovieController extends Controller
                 $query->where('id', $selectedGenre);
             })->paginate(18);
         } else {
-            $movies = Movie::paginate(18);
+            $movies = Movie::paginate(20);
         }
 
+        $featuredMovie = Movie::where('is_featured', true)->first() ?? null;
+
         $genres = Genre::all(); // Fetch all available genres
-        return view('home', compact('movies','genres', 'selectedGenre' ));
+
+        return view('home', compact('movies', 'genres', 'selectedGenre', 'featuredMovie'));
     }
 
     /**
@@ -41,15 +45,19 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            // Validate the incoming request
+
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'trailer_url' => 'nullable|url',
             'image_url' => 'nullable|url',
             'director_name' => 'nullable|string|max:255',
         ]);
-
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withErrors($validator, 'addmovie');
+        }
         // Create a new movie
         Movie::create([
             'title' => $request->title,
@@ -60,7 +68,7 @@ class MovieController extends Controller
         ]);
 
         // Redirect to the movies list with success message
-        return redirect()->route('/')->with('success', 'Movie added successfully!');
+        return redirect()->route('home')->with('success', 'Movie added successfully!');
     }
 
     /**
@@ -118,5 +126,15 @@ class MovieController extends Controller
 
         // Redirect to the movies list with success message
         return redirect()->route('home')->with('success', 'Movie deleted successfully!');
+    }
+
+    // Searching
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        $movies = Movie::where('title', 'like', "%{query}%")->get();
+
+        return view('movies.search-results', compact('movies'));
     }
 }

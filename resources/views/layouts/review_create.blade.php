@@ -7,15 +7,18 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
-<div class="w-1/3 mx-auto">
-    <div class="mt-8">
-        <img src="{{-- {{$movie->image_url}} --}} https://posters.movieposterdb.com/22_01/2021/8721424/t_8721424_ac84bfc0.jpg" alt="">
+<div class="w-2/4 mx-auto absolute inset-0 top-16 px-8 bg-gray-200 h-fit pb-8">
+    <div class="mt-8 flex place-content-between">
+        <img class ="w-[100px] h-[150px]" src="{{$movie->image_url}}" alt="">
+        <a href="{{ route('movies.show', $movie->id) }}">X</a>
     </div>
-        <form class="flex flex-col gap-4" action="">
+
+        <form class="flex flex-col gap-4" action="{{ route('reviews', $movie->id)}}" method="POST">
+            @csrf
             <label>Title:</label>
-            <input type="text" placeholder="{{--@if ($request->submit == 'edit') {{ $review->title }} @endif--}}">
+            <input type="text" placeholder="{{--@if ($request->submit == 'edit') {{ $review->title }} @endif--}}" required name="title">
             <label>Description</label>
-            <textarea rows="15">
+            <textarea rows="15" required name="description">
                 {{-- @if ($request->submit == 'edit')
                 {{ $review->description }}
                 @endif --}}
@@ -23,7 +26,7 @@
             {{-- @if ($request->submit == 'edit')
                 <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="delete">Delete</button>
             @endif --}}
-            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="create">Save</button>
+            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit">Save</button>
 
         </form>
     </div>
