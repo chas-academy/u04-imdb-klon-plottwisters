@@ -18,6 +18,7 @@
                 </div>
             </div>
 
+
             <!-- Searchbar -->
             <div class="hidden md:flex flex.grow justify-center items-center">
                 @include('components.searchbar')

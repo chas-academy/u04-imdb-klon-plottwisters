@@ -1,4 +1,9 @@
 <x-head-layout>
+    {{-- @include ('layouts.navigation') --}}
+    <!-- Searchbar -->
+    <div class="md:hidden flex justify-center items-center py-2">
+        @include('components.searchbar')
+    </div>
 
     <div class="flex flex-1 items-start w-fit m-4 flex-col mx-auto">
         <h2 class="text-white font-bold text-3xl">Featured Movie</h2>
