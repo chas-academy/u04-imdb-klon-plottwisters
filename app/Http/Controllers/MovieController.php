@@ -19,13 +19,16 @@ class MovieController extends Controller
         if ($selectedGenre) {
             $movies = Movie::whereHas('genres', function ($query) use ($selectedGenre) {
                 $query->where('id', $selectedGenre);
-            })->paginate(20);
+            })->paginate(18);
         } else {
-            $movies = Movie::paginate(18);
+            $movies = Movie::paginate(20);
         }
 
+        $featuredMovie = Movie::where('is_featured', true)->first() ?? null;
+
         $genres = Genre::all(); // Fetch all available genres
-        return view('home', compact('movies', 'genres', 'selectedGenre'));
+
+        return view('home', compact('movies', 'genres', 'selectedGenre', 'featuredMovie'));
     }
 
     /**
