@@ -16,16 +16,16 @@
         <form class="flex flex-col gap-4" action="{{ route('reviews', $movie->id)}}" method="POST">
             @csrf
             <label>Title:</label>
-            <input type="text" placeholder="{{--@if ($request->submit == 'edit') {{ $review->title }} @endif--}}" required name="title">
+            <input type="text" placeholder="@if (request()->has('reviewEdit')) {{ $review->title }} @endif" required name="title">
             <label>Description</label>
             <textarea rows="15" required name="description">
-                {{-- @if ($request->submit == 'edit')
+                @if (request()->has('reviewEdit'))
                 {{ $review->description }}
-                @endif --}}
+                @endif
             </textarea>
-            {{-- @if ($request->submit == 'edit')
+            @if (request()->has('reviewEdit'))
                 <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="delete">Delete</button>
-            @endif --}}
+            @endif
             <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit">Save</button>
 
         </form>

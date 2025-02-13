@@ -41,13 +41,21 @@
             <p class="text-white">{{ $movie->description }}</p>
             @foreach ($reviews as $review)
             <div class="bg-white w-full mx-auto items-center mt-4 rounded-md">
-                @if(Auth::check() && $review->user_id == Auth::user()->id)
-                <form action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
-                    @csrf
-                    @method ('DELETE')
-                    <button class="bg-[#F15C5F] text-center rounded-md font-bold pl-2 pr-2 mx-auto mt-4 " type="submit">Delete</button>
-                </form>
-                @endif
+                <div class="flex justify-end m-2 gap-2">
+                    @if(Auth::check() && $review->user_id == Auth::user()->id)
+                    <form action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
+                        @csrf
+                        @method ('DELETE')
+                        <button class="inline-flex items-center w-xl px-3 py-2 bg-[#F15C5F] border border-transparent rounded-xl font-semibold text-xs text-black uppercase" type="submit">Delete</button>
+                    </form>
+                    <x-primary-a :href="route('movies.show', [$movie->id, 'reviewEdit', $review->id])" :active="request()->routeIs('movies.show', [$movie->id, 'reviewEdit', $review->id])">
+                        {{ __('Edit') }}
+                    </x-primary-a>
+                    @if (request()->has('reviewEdit'))
+                    @include ('layouts.review_create')
+                    @endif
+                    @endif
+                </div>
                 <p class="text-center font-bold mt-4">{{$review->title}}</p>
                 <p class="text-center p-8">{{$review->description}}</p>
                 {{-- <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a> --}}

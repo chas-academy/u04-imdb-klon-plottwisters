@@ -99,6 +99,10 @@ Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
 // Route::get('/admin/editUser', function () {
 //     return view('admin.edit');
 // });
+Route::put('/review/{review}', [ReviewController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('review.update');
+
 Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('review.destroy');
