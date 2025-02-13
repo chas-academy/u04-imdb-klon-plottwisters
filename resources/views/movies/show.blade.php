@@ -41,8 +41,12 @@
             <p class="text-white">{{ $movie->description }}</p>
             @foreach ($reviews as $review)
             <div class="bg-white w-full mx-auto items-center mt-4 rounded-md">
-                @if(Auth::check())
-                <a href="{{ route('movies.show', $movie->id) }}">X</a>
+                @if(Auth::check() && $review->user_id == Auth::user()->id)
+                <form action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
+                    @csrf
+                    @method ('DELETE')
+                    <button class="bg-[#F15C5F] text-center rounded-md font-bold pl-2 pr-2 mx-auto mt-4 " type="submit">Delete</button>
+                </form>
                 @endif
                 <p class="text-center font-bold mt-4">{{$review->title}}</p>
                 <p class="text-center p-8">{{$review->description}}</p>
