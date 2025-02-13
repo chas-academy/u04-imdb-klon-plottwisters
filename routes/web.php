@@ -101,9 +101,9 @@ Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
 // Route::get('/admin/editUser', function () {
 //     return view('admin.edit');
 // });
-Route::delete('/', [ReviewController::class, 'destroy'])
+Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
-    ->name('genre.destroy');
+    ->name('review.destroy');
 
 
 
