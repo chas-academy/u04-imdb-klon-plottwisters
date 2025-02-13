@@ -6,7 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RatingController;
+
 use App\Http\Controllers\AdminController;
+
 use App\Models\Movie;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;

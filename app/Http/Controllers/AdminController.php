@@ -110,6 +110,16 @@ class AdminController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User deleted.');
     }
 
+
+    public function setFeaturedMovie(Movie $movie)
+    {
+        Movie::where('is_featured, true')->update(['is_featured' => false]);
+
+        $movie->update(['is_featured' => true]);
+
+        return redirect()->back()->with('sucess', 'Featured movie updated.');
+    }
+
     public function usersIndex(Request $request)
     {
  
@@ -129,5 +139,6 @@ class AdminController extends Controller
 
     return redirect()->route('admin.users.index')->with('success', 'User role updated.');
 }
+
 
 }
