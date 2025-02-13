@@ -21,7 +21,7 @@ class MovieController extends Controller
                 $query->where('id', $selectedGenre);
             })->paginate(20);
         } else {
-            $movies = Movie::paginate(18);
+            $movies = Movie::paginate(20);
         }
 
         $genres = Genre::all(); // Fetch all available genres
