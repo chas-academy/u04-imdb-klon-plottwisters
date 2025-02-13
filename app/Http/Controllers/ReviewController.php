@@ -35,7 +35,7 @@ class ReviewController extends Controller
 
         ]);
 
-        return redirect()->route('movies.show', $movie->id); // might have to change redirects
+        return redirect()->route('movies.show', $movie->id); 
     }
 
     // Show reviews
@@ -46,6 +46,7 @@ class ReviewController extends Controller
         $reviews = Review::where('movie_id', $movie->id)->latest()->get();
         $movie = $movie;
         // return response()->json($reviews);
+     
         
         return view('movies.show', compact('reviews', 'movie'));
     }

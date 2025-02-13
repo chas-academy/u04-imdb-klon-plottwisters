@@ -91,12 +91,20 @@ Route::post('/movies/{movie}/rate', [RatingController::class, 'store'])->name('r
 //#################### REVIEWS ##################
 
 Route::get('/movies/{movie}', [ReviewController::class, 'index'])
-    ->middleware(['auth', 'verified'])
     ->name('movies.show');
 
 Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('reviews');
+
+
+// Route::get('/admin/editUser', function () {
+//     return view('admin.edit');
+// });
+Route::delete('/', [ReviewController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('genre.destroy');
+
 
 
 //####################GENRE##################
@@ -142,9 +150,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/watchlists', [WatchlistController::class, 'store'])->name('watchlists.store');
     Route::get('/watchlists/create', [WatchlistController::class, 'create'])->middleware('auth')->name('watchlists.create');
-    Route::get('/watchlists', [WatchlistController::class, 'index'])->middleware('auth')->name('watchlists.index');
+    Route::get('/watchlists', [WatchlistController::class, 'index'])->middleware(['auth', 'verified'])->name('watchlists.index');
     Route::get('/watchlists/{watchlist}', [WatchlistController::class, 'show'])->name('watchlists.show');
-    Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
+    // Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movies.show');
 
     Route::delete('/watchlists/{watchlist}', [WatchlistController::class, 'delete'])->name('watchlists.delete');
     Route::post('/watchlists/movies', [WatchlistController::class, 'addMovie'])->name('watchlists.addMovie');

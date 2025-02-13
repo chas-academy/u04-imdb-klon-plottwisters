@@ -1,1 +1,1 @@
-<img src="https://i.ibb.co/6t45zvm/Button.png" alt="">
+<img class="w-40" src="https://i.ibb.co/6t45zvm/Button.png" alt="">
