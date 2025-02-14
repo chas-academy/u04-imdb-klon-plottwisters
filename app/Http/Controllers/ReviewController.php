@@ -86,6 +86,7 @@ class ReviewController extends Controller
 
     public function destroy(Review $review)
     {
+        
         if ($review->user_id !== Auth::id() && !Auth::user()->is_admin) {
             return redirect()->back()->with('error', 'unauthorized');
         }
