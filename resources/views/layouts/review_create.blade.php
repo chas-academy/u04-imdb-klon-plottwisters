@@ -12,10 +12,18 @@
         <img class ="w-[100px] h-[150px]" src="{{$movie->image_url}}" alt="">
         <a href="{{ route('movies.show', $movie->id) }}">X</a>
     </div>
-
-        <form class="flex flex-col gap-4" action="{{ route('reviews', $movie->id)}}" method="POST">
+    
+        <form class="flex flex-col gap-4 pb-20" action="@if (request()->has('reviewEdit')) {{ route('review.update', ['id' => $review->id]) }} @else {{ route('reviews', $movie->id)}} @endif" method="POST">
             @csrf
+            
+            @if (request()->has('reviewEdit'))
+            
+            @method('PUT')
+            @endif
+
             <label>Title:</label>
+            <input type="hidden" name="movie_id" value="{{$movie->id}}">
+            <input type="hidden" name="id" value="{{$review->id}}">
             <input type="text" placeholder="@if (request()->has('reviewEdit')) {{ $review->title }} @endif" required name="title">
             <label>Description</label>
             <textarea rows="15" required name="description">
@@ -24,9 +32,9 @@
                 @endif
             </textarea>
             @if (request()->has('reviewEdit'))
-                <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="delete">Delete</button>
+                <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-4" type="submit" value="delete">Delete</button>
             @endif
-            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit">Save</button>
+            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto" type="submit">Save</button>
 
         </form>
     </div>

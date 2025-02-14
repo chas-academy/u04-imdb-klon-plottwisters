@@ -89,8 +89,8 @@ Route::post('/movies/{movie}/rate', [RatingController::class, 'store'])->name('r
 
 //#################### REVIEWS ##################
 
-Route::get('/movies/{movie}', [ReviewController::class, 'index'])
-    ->name('movies.show');
+// Route::get('/movies/{movie}', [ReviewController::class, 'index'])
+//     ->name('movies.show');
 
 Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
     ->middleware(['auth', 'verified'])
@@ -99,9 +99,13 @@ Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
 // Route::get('/admin/editUser', function () {
 //     return view('admin.edit');
 // });
-Route::put('/review/{review}', [ReviewController::class, 'update'])
+Route::put('/review/{id}', [ReviewController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('review.update');
+
+Route::get('/review/{id}', [ReviewController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('review.show');
 
 Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware(['auth', 'verified'])

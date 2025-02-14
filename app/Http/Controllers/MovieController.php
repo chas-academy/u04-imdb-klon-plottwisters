@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use App\Models\Genre;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -74,7 +75,11 @@ class MovieController extends Controller
     public function show(Movie $movie)
     {
         // Show a single movie
-        return view('movies.show', compact('movie'));
+
+        $reviews = Review::where('movie_id', $movie->id)->get();
+        
+        // dd($reviews);
+        return view('movies.show', compact('movie', 'reviews'));
     }
 
     /**

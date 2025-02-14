@@ -3,7 +3,7 @@
     <div class="flex flex-row w-2/3 mx-auto mt-10 h-2/3 pb-20">
         <div>
             @include ('layouts.single-movie')
-            @include ('layouts.ratethefilm')
+            {{-- @include ('layouts.ratethefilm') --}}
             <div class="flex flex-col gap-4 mt-4">
                 <p class="text-white">Rate the film</p>
                 <p class="text-[#A693FF]">Director:</p>
@@ -40,6 +40,7 @@
             </div>
             <p class="text-white">{{ $movie->description }}</p>
             @foreach ($reviews as $review)
+            {{-- @dd($reviews); --}}
             <div class="bg-white w-full mx-auto items-center mt-4 rounded-md">
                 <div class="flex justify-end m-2 gap-2">
                     @if(Auth::check() && $review->user_id == Auth::user()->id)
@@ -48,21 +49,30 @@
                         @method ('DELETE')
                         <button class="inline-flex items-center w-xl px-3 py-2 bg-[#F15C5F] border border-transparent rounded-xl font-semibold text-xs text-black uppercase" type="submit">Delete</button>
                     </form>
-                    <x-primary-a :href="route('movies.show', [$movie->id, 'reviewEdit', $review->id])" :active="request()->routeIs('movies.show', [$movie->id, 'reviewEdit', $review->id])">
+                    <x-primary-a :href="route('movies.show', ['movie' => $movie->id, 'reviewEdit', 'reviewId' => $review->id])" :active="request()->routeIs('movies.show', [$movie->id, 'reviewEdit', $review->id])">
                         {{ __('Edit') }}
                     </x-primary-a>
-                    @if (request()->has('reviewEdit'))
-                    @include ('layouts.review_create')
-                    @endif
                     @endif
                 </div>
                 <p class="text-center font-bold mt-4">{{$review->title}}</p>
                 <p class="text-center p-8">{{$review->description}}</p>
                 {{-- <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a> --}}
             </div>
+            {{-- {{dd($reviews); }} --}}
             @endforeach
             <div>
                 @if (request()->has('create'))
+                @include ('layouts.review_create')
+                @endif
+                @if (request()->has('reviewEdit'))
+                {{-- {{dd(request()->query('reviewId'));}} --}}
+                @foreach ($reviews as $review) 
+                    @if ($review->id == request()->query('reviewId')) 
+                    @break
+                    @endif
+                    
+                @endforeach
+
                 @include ('layouts.review_create')
                 @endif
             </div>

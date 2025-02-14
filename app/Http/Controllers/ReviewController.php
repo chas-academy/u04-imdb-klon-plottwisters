@@ -21,12 +21,12 @@ class ReviewController extends Controller
     // Create review
     public function store(Request $request, Movie $movie)
     {
-
+                                                                                                                                                                                            
         $request->validate([
             'title' => 'required|string|max:1000',
             'description' => 'required|string|max:4000',
         ]);
-       
+     
         Review::create([
             'user_id' => Auth::id(),
             'movie_id' => $movie->id,
@@ -46,26 +46,40 @@ class ReviewController extends Controller
         $reviews = Review::where('movie_id', $movie->id)->latest()->get();
         $movie = $movie;
         // return response()->json($reviews);
-     
+        
         
         return view('movies.show', compact('reviews', 'movie'));
     }
 
+    // public function show(Review $review, string $id)
+    // {
+    //     // Show a single movie
+    //     $review = Review::findorFail($id);
+    //     dd($review);
+    //     return view('movies.show', compact('review'));
+    // }
+
     // Update
 
-    public function update(Request $request, Review $review)
+    public function update(Request $request, Review $review, Movie $movie)
     {
+        $movie = Movie::findOrFail($request->movie_id);
+        // dd($movie);
+       $review = Review::findOrFail($request->id);
+    //    dd($review);
         if ($review->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'unauthorized');
         }
-
+        
         $validated = $request->validate([
-            'review' => 'required|string|max:1000',
+            'title' => 'required|string|max:1000',
+            'description' => 'required|string|max:4000',
         ]);
+        
 
         $review->update($validated);
 
-        return redirect()->back()->with('success', 'Review updated successfully!');
+        return redirect()->route('movies.show', $movie->id);
     }
 
     // Delete
