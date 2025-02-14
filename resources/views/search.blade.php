@@ -1,4 +1,8 @@
 <x-head-layout>
+    <!-- Searchbar -->
+    <div class="md:hidden flex justify-center items-center py-2">
+        @include('components.searchbar')
+    </div>
     <body class="bg-gray-800">
     <div class="container mx-auto mt-6">
         <!-- <x-searchbar></x-searchbar>  -->

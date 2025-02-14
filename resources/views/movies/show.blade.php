@@ -1,5 +1,9 @@
 
 <x-head-layout>
+    <!-- Searchbar -->
+    <div class="md:hidden flex justify-center items-center py-2">
+        @include('components.searchbar')
+    </div>
     <div class="lg:flex flex-row lg:w-3/4 mx-auto mt-10 h-2/3 pb-20">
         <div class="flex w-2/3 lg:w-auto mx-auto lg:block justify-around">
             @include ('layouts.single-movie')
