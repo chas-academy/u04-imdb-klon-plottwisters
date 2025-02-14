@@ -46,21 +46,26 @@
                 @endif
             </div>
             <p class="text-white">{{ $movie->description }}</p>
-            @foreach ($reviews as $review)
-            <div class="bg-white w-full mx-auto items-center mt-4 rounded-md">
-                @if(Auth::check() && $review->user_id == Auth::user()->id)
-                <form action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
-                    @csrf
-                    @method ('DELETE')
-                    <button class="bg-[#F15C5F] text-center rounded-md font-bold pl-2 pr-2 mx-auto mt-4 " type="submit">Delete</button>
-                </form>
-                @endif
-                <p class="text-center font-bold mt-4">{{$review->title}}</p>
-                <p class="text-center p-8">{{$review->description}}</p>
-                {{-- <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a> --}}
-            </div>
-            @endforeach
-            <div>
+             @foreach ($reviews as $review)
+                        <div class="bg-white p-6 rounded-md shadow-md relative">
+                            @if (Auth::check() && (auth()->user()->is_admin || auth()->id() == $review->user_id))
+                                <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="absolute top-4 right-4">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-primary-button type="submit" 
+                                        onclick="return confirm('Are you sure you want to delete this review?')">
+                                        Delete
+                                    </x-primary-button>
+                                </form>
+                            @endif
+                            
+                            <h3 class="font-bold text-lg">{{ $review->title }}</h3>
+                            <p class="mt-2">{{ $review->description }}</p>
+                            <p class="text-sm text-gray-500 mt-2">
+                            Posted by <strong>{{ $review->user->name }}</strong>
+                        </p>
+                        </div>
+                @endforeach
                 @if (request()->has('create'))
                 @include ('layouts.review_create')
                 @endif

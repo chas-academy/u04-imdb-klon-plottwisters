@@ -91,7 +91,7 @@
                     <div class="bg-white p-6 rounded-md shadow-md relative m-6 w-4/5 md:w-2/5">
                         <!-- Delete Button -->
                         @if (auth()->user()->is_admin || auth()->id() == $review->user_id)
-                            <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="absolute top-4 left-4">
+                            <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="absolute top-4 right-4">
                                 @csrf
                                 @method('DELETE')
                                 <x-primary-button type="submit" 
@@ -102,13 +102,13 @@
                         @endif
 
                         <!-- User Information -->
-                        <p class="text-sm text-gray-500 text-center mb-2">
+                        <p class="text-sm text-gray-500 mb-2">
                             Posted by <strong>{{ $review->user->name }}</strong>
                         </p>
 
                         <!-- Review Content -->
-                        <h3 class="font-bold text-lg text-center">{{ $review->title }}</h3>
-                        <p class="text-center mt-2">{{ $review->description }}</p>
+                        <h3 class="font-bold text-lg">{{ $review->title }}</h3>
+                        <p class="mt-2">{{ $review->description }}</p>
                     </div>
                 @endforeach
             </div>
