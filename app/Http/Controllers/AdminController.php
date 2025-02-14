@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use \App\Models\Movie;
 use \App\Models\User;
 use \App\Models\Rating;
+use \App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -124,12 +125,13 @@ class AdminController extends Controller
     {
  
         $editingUserId = $request->input('editingUserId');
+        $reviews = Review::latest()->get();
 
     
         $users = User::all();
 
    
-        return view('admin.users.index', compact('users', 'editingUserId'));
+        return view('admin.users.index', compact('users', 'editingUserId', 'reviews'));
     }
 
     public function toggleUserRole(User $user)
