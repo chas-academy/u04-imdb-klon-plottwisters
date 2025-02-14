@@ -1,5 +1,6 @@
 <div class="aspect-6/2 flex flex-row flex-wrap lg:w-2/3 mx-auto gap-4 md:gap-8">
     @foreach ($movies as $movie)
+
         <div class=" flex flex-col flex-1 items-center m-4 gap-2">
             <p class="text-white">{{ $movie['title'] }}</p>
 
@@ -48,18 +49,6 @@
           {{-- @if (Auth::check() && Auth::user()->name == 'admin')
             <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 
-            <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
-                @csrf
-                @method('DELETE')
-                <button class="text-white btn btn-delete" type="submit" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
-            </form>
-        @endif--}}
-    </div>
-    @endforeach
-</div>
-{{--
-            <a class="text-white" href="{{ route('movies.edit', $movie->id) }}" class="btn btn-warning">Edit</a>
-
         <form action="{{ route('movies.destroy', $movie->id) }}" method="POST" style="display: inline;">
             @csrf
             @method('DELETE')
@@ -67,8 +56,8 @@
         </form>
         @endif --}}
 
-        {{-- @include('components.rating', ['movie'=>$movie])
+        {{-- @include('components.rating', ['movie'=>$movie]) --}}
 
     </div>
-    @endforeach --}}
-{{-- </div> --}}
+    @endforeach
+</div>

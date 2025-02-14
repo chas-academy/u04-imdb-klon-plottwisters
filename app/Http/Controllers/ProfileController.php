@@ -19,11 +19,11 @@ class ProfileController extends Controller
 
     $user = $request->user();
 
-    $watchlists = $user->watchlists; 
-        return view('profile.edit', [
-            'user' => $request->user(),
-            'watchlists' => $watchlists,
-        ]);
+    return view('profile.edit', [
+        'user' => $user,
+        'watchlists' => $user->watchlists,
+        'reviews' => $user->reviews,
+    ]);
     }
 
     public function updatePicture(Request $request): RedirectResponse

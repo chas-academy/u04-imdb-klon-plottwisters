@@ -1,11 +1,18 @@
 
 <x-head-layout>
-    <div class="flex flex-row w-2/3 mx-auto mt-10 h-2/3 pb-20">
-        <div>
+    <!-- Searchbar -->
+    <div class="md:hidden flex justify-center items-center py-2">
+        @include('components.searchbar')
+    </div>
+    <div class="lg:flex flex-row lg:w-3/4 mx-auto mt-10 h-2/3 pb-20">
+        <div class="flex w-2/3 lg:w-auto mx-auto lg:block justify-around">
             @include ('layouts.single-movie')
             {{-- @include ('layouts.ratethefilm') --}}
-            <div class="flex flex-col gap-4 mt-4">
-                <p class="text-white">Rate the film</p>
+            <div class="flex flex-col w-48 mx-auto gap-4 mt-4">
+                {{-- @include ('layouts.ratethefilm') --}}
+                @include('components.rating', ['movie'=>$movie])
+
+                {{-- <p class="text-white">Rate the film</p> --}}
                 <p class="text-[#A693FF]">Director:</p>
                 <p class="text-white">{{ $movie->director_name }}</p>
             
@@ -41,11 +48,14 @@
             {{-- @dd($reviews); --}}
             <div class="bg-white w-full mx-auto items-center mt-4 rounded-md">
                 <div class="flex justify-end m-2 gap-2">
-                    @if(Auth::check() && $review->user_id == Auth::user()->id)
+                    @if (Auth::check() && (auth()->user()->is_admin || auth()->id() == $review->user_id))
                     <form action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
                         @csrf
                         @method ('DELETE')
-                        <button class="inline-flex items-center w-xl px-3 py-2 bg-[#F15C5F] border border-transparent rounded-xl font-semibold text-xs text-black uppercase" type="submit">Delete</button>
+                        <button class="inline-flex items-center w-xl px-3 py-2 bg-[#F15C5F] border border-transparent rounded-xl font-semibold text-xs text-black uppercase mr-2" type="submit" 
+                            onclick="return confirm('Are you sure you want to delete this review?')">
+                            Delete
+                        <button>
                     </form>
                     <x-primary-a :href="route('movies.show', ['movie' => $movie->id, 'reviewEdit', 'reviewId' => $review->id])" :active="request()->routeIs('movies.show', [$movie->id, 'reviewEdit', $review->id])">
                         {{ __('Edit') }}
@@ -54,33 +64,36 @@
                 </div>
                 <p class="text-center font-bold mt-4">{{$review->title}}</p>
                 <p class="text-center p-8">{{$review->description}}</p>
+                <p class="text-sm text-gray-500 m-2">
+                    Posted by <strong>{{ $review->user->name }}</strong>
+                </p>
                 {{-- <a href="" class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold">Read more</a> --}}
             </div>
             {{-- {{dd($reviews); }} --}}
             @endforeach
-            <div>
-                @if (request()->has('create'))
-                    @include ('layouts.review_create')
-                @endif
 
-                @if (request()->has('reviewEdit'))
-                {{-- {{dd(request()->query('reviewId'));}} --}}
-                    @foreach ($reviews as $review) 
-                        @if ($review->id == request()->query('reviewId')) 
-                            @break
-                        @endif
-                    @endforeach
-                    @include ('layouts.review_create')
-                @endif
+            @if (request()->has('create'))
+                @include ('layouts.review_create')
+            @endif
 
-                @if (request()->has('edit'))
-                    {{-- @foreach ($movies as $movie) 
-                        @if ($movie->id == request()->query('movieId')) 
-                            @break
-                        @endif
-                    @endforeach --}}
-                    @include ('layouts.addmovie')
-                @endif
+            @if (request()->has('reviewEdit'))
+            {{-- {{dd(request()->query('reviewId'));}} --}}
+                @foreach ($reviews as $review) 
+                    @if ($review->id == request()->query('reviewId')) 
+                        @break
+                    @endif
+                @endforeach
+                @include ('layouts.review_create')
+            @endif
+
+            @if (request()->has('edit'))
+                {{-- @foreach ($movies as $movie) 
+                    @if ($movie->id == request()->query('movieId')) 
+                        @break
+                    @endif
+                @endforeach --}}
+                @include ('layouts.addmovie')
+            @endif
             </div>
         </div>
     </div>

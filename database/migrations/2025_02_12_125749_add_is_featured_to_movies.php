@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ratings', function (Blueprint $table) {
-            $table->id();
-            $table->integer('rating');
-            $table->foreignId('movie_id')->constrained('movies')->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('movies', function (Blueprint $table) {
+            $table->boolean('is_featured')->default(false);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ratings');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->dropColumn('is_featured');
+        });
     }
 };
