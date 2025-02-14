@@ -24,7 +24,7 @@
             <label>Title:</label>
             <input type="hidden" name="movie_id" value="{{$movie->id}}">
             <input type="hidden" name="id" value="{{$review->id}}">
-            <input type="text" placeholder="@if (request()->has('reviewEdit')) {{ $review->title }} @endif" required name="title">
+            <input type="text" value="@if (request()->has('reviewEdit')) {{ $review->title }} @endif" required name="title">
             <label>Description</label>
             <textarea rows="15" required name="description">
                 @if (request()->has('reviewEdit'))

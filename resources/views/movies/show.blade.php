@@ -25,17 +25,15 @@
             <iframe width="560" height="315" src="{{ $movie->trailer_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <div class="flex w-full justify-end gap-4 mt-4">
                 @if (Auth::check() && Auth::user()->name == 'admin')
-                    <x-primary-a :href="route('movies.show', [$movie->id, 'edit'])" :active="request()->routeIs('movies.create')">
+                    <x-primary-a :href="route('movies.show', ['movie' => $movie->id, 'edit', 'movieId' => $movie->id])" :active="request()->routeIs('movies.update')">
                         {{ __('Edit movie') }}
                     </x-primary-a>
-                    @if (request()->has('edit'))
-                    @include ('layouts.addmovie')
-                    @endif
-                    <div>
+
+                    {{-- <div>
                     @if($errors->addmovie)
                     <p>{{$errors->addmovie->first()}}</p>
                    </div>
-                    @endif
+                    @endif --}}
                 @endif
             </div>
             <p class="text-white">{{ $movie->description }}</p>
@@ -62,18 +60,26 @@
             @endforeach
             <div>
                 @if (request()->has('create'))
-                @include ('layouts.review_create')
+                    @include ('layouts.review_create')
                 @endif
+
                 @if (request()->has('reviewEdit'))
                 {{-- {{dd(request()->query('reviewId'));}} --}}
-                @foreach ($reviews as $review) 
-                    @if ($review->id == request()->query('reviewId')) 
-                    @break
-                    @endif
-                    
-                @endforeach
+                    @foreach ($reviews as $review) 
+                        @if ($review->id == request()->query('reviewId')) 
+                            @break
+                        @endif
+                    @endforeach
+                    @include ('layouts.review_create')
+                @endif
 
-                @include ('layouts.review_create')
+                @if (request()->has('edit'))
+                    {{-- @foreach ($movies as $movie) 
+                        @if ($movie->id == request()->query('movieId')) 
+                            @break
+                        @endif
+                    @endforeach --}}
+                    @include ('layouts.addmovie')
                 @endif
             </div>
         </div>
