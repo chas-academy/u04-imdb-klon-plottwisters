@@ -35,7 +35,7 @@ class ReviewController extends Controller
 
         ]);
 
-        return redirect()->route('movies.show', $movie->id); 
+        return redirect()->route('reviews'); 
     }
 
     // Show reviews
