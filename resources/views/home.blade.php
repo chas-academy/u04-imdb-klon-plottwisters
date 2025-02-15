@@ -17,7 +17,7 @@
         @endif
 
         <div class="flex w-full justify-end gap-4 mt-4">
-            @if (Auth::check() && Auth::user()->name == 'admin')
+            @if (Auth::check() && Auth::user()->is_admin == '1')
             <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Edit Featured Movie') }}
             </x-primary-a>
