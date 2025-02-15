@@ -26,11 +26,7 @@
             @endif
             <input type="text" value="@if (request()->has('reviewEdit')) {{ $review->title }} @endif" required name="title">
             <label>Description</label>
-            <textarea rows="15" required name="description">
-                @if (request()->has('reviewEdit'))
-                {{ $review->description }}
-                @endif
-            </textarea>
+            <textarea rows="10" name="description" required>@if (request()->has('reviewEdit')){{ $review->description }}@endif</textarea>
             <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto" type="submit">Save</button>
         </form>
         {{-- hassle with with back route should be --}}
