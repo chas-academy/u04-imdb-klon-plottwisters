@@ -21,7 +21,7 @@ class ReviewControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_create_review(): void
+    public function test_store_review(): void
     {
         $user = User::factory()->create();
         $movie = Movie::factory()->create();
