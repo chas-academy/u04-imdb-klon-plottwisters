@@ -10,26 +10,27 @@
         @endif
 <div class="w-2/4 mx-auto absolute inset-0 top-20 px-8 bg-gray-200 h-fit pb-8">
     <a class="float-right p-4 " href="{{ route('home') }}">X</a>
-        <form class="flex flex-col gap-2 mt-4 p-8 pl-12" action="{{ route('movies.store')}}" method="POST">
+        <form class="flex flex-col gap-2 mt-4 p-8 pl-12" action="@if (request()->has('edit')) {{ route('movies.update', $movie->id) }} @else {{ route('movies.store')}} @endif" method="POST">
             @csrf
+            @if (request()->has('edit'))
+            @method('PUT')
+            @endif
             <label>Movie trailer url:</label>
-            <input type="text" placeholder="{{--@if ($request->submit == 'editMovie') {{ $movie->image_url }} @endif--}}" name="trailer_url">
+            <input type="text" value="@if (request()->has('edit')) {{ $movie->trailer_url }} @endif" name="trailer_url">
             <label>Movie image url:</label>
-            <input type="text" placeholder="{{--@if ($request->submit == 'editMovie') {{ $movie->trailer_url }} @endif--}}"name="image_url">
+            <input type="text" value="@if (request()->has('edit')) {{ $movie->image_url }} @endif"name="image_url">
             <label>Title:</label>
-            <input type="text" name="title" placeholder="{{--@if ($request->submit == 'editMovie') {{ $movie->title }} @endif--}}" required>
+            <input type="text" name="title" value="@if (request()->has('edit')) {{ $movie->title }} @endif" required>
             <label>Director name:</label>
-            <input type="text" placeholder="{{--@if ($request->submit == 'editMovie') {{ $movie->director_name }} @endif--}}" name="director_name" required>
+            <input type="text" value="@if (request()->has('edit')) {{ $movie->director_name }} @endif" name="director_name" required>
             <label>Description</label>
             <textarea rows="15" name="description" required>
-                {{-- @if ($request->submit == 'editMovie')
-                {{ $movie->description }}
-                @endif --}}
+                @if (request()->has('edit')) {{ $movie->description }} @endif
             </textarea>
-            {{-- @if ($request->submit == 'editMovie')
-                <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="delete">Delete</button>
-            @endif --}}
-            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit">Save</button>
+            @if (request()->has('edit'))
+            <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-4" type="submit" value="delete">Delete</button>
+            @endif
+            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto" type="submit">Save</button>
 
         </form>
     </div>

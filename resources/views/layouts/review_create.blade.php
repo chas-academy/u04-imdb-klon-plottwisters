@@ -12,22 +12,37 @@
         <img class ="w-[100px] h-[150px]" src="{{$movie->image_url}}" alt="">
         <a href="{{ route('movies.show', $movie->id) }}">X</a>
     </div>
-
-        <form class="flex flex-col gap-4" action="{{ route('reviews', $movie->id)}}" method="POST">
+        <form class="flex flex-col gap-4" action="@if (request()->has('reviewEdit')) {{ route('review.update', ['id' => $review->id]) }} @else {{ route('reviews', $movie->id)}} @endif" method="POST">
             @csrf
+            
+            @if (request()->has('reviewEdit')) 
+                @method('PUT')
+            @endif
+
             <label>Title:</label>
-            <input type="text" placeholder="{{--@if ($request->submit == 'edit') {{ $review->title }} @endif--}}" required name="title">
+            <input type="hidden" name="movie_id" value="{{$movie->id}}">
+            @if (request()->has('reviewEdit'))
+            <input type="hidden" name="id" value="{{$review->id}}">
+            @endif
+            <input type="text" value="@if (request()->has('reviewEdit')) {{ $review->title }} @endif" required name="title">
             <label>Description</label>
             <textarea rows="15" required name="description">
-                {{-- @if ($request->submit == 'edit')
+                @if (request()->has('reviewEdit'))
                 {{ $review->description }}
-                @endif --}}
+                @endif
             </textarea>
-            {{-- @if ($request->submit == 'edit')
-                <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit" value="delete">Delete</button>
-            @endif --}}
-            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto mt-8" type="submit">Save</button>
-
+            <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto" type="submit">Save</button>
         </form>
-    </div>
+        {{-- hassle with with back route should be --}}
+        {{-- @if (request()->has('reviewEdit'))
+            <form class="flex flex-col gap-4 pb-20" action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
+                @csrf
+                @method ('DELETE')
+                <input type="hidden" name="movie_id" value="{{$movie->id}}">
+                <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/3 mx-auto mt-4" type="submit" 
+                    onclick="return confirm('Are you sure you want to delete this review?')">
+                    Delete
+                </button>
+            </form>
+        @endif --}}
 </div>
