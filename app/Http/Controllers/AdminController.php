@@ -112,13 +112,16 @@ class AdminController extends Controller
     }
 
 
-    public function setFeaturedMovie(Movie $movie)
+    public function setFeaturedMovie(Request $request)
     {
-        Movie::where('is_featured, true')->update(['is_featured' => false]);
+        $movieId = $request->input('featured');
+        
+        $selectedMovie = Movie::where('id', $movieId)->first();
+        Movie::where('is_featured', true)->update(['is_featured' => false]);
+        // dd($selectedMovie);
+        $selectedMovie->update(['is_featured' => 1]);
 
-        $movie->update(['is_featured' => true]);
-
-        return redirect()->back()->with('sucess', 'Featured movie updated.');
+        return redirect()->back()->with('success', 'Featured movie updated.');
     }
 
     public function usersIndex(Request $request)

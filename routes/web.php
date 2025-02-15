@@ -188,6 +188,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/movies/{movie}/edit', [AdminController::class, 'editMovie'])->name('admin.movies.edit');
     Route::put('/movies/{movie}', [AdminController::class, 'updateMovie'])->name('admin.movies.update');
     Route::delete('/movies/{movie}', [AdminController::class, 'deleteMovie'])->name('admin.movies.delete');
+    Route::get('/movies', [AdminController::class, 'setFeaturedMovie'])->name('admin.setfeatured');
 });
 
 

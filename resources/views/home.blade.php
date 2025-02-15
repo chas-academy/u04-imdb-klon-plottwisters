@@ -18,9 +18,21 @@
 
         <div class="flex w-full justify-end gap-4 mt-4">
             @if (Auth::check() && Auth::user()->name == 'admin')
-            <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+            <form action="{{ route('admin.setfeatured') }}" method="GET">
+                <label class="text-white mr-2">Set featured movie:</label>
+                <select class="rounded-md" name="featured" onchange="this.form.submit()">
+                    <option value="">All movies</option>
+    
+                    @foreach ($movies as $movie)
+                    <option value="{{ $movie->id }}" {{ request('movie') == $movie->id ? 'selected' : '' }}>
+                        {{ $movie->title }}
+                    </option>
+                    @endforeach
+                </select>
+            </form>
+            {{-- <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Edit Featured Movie') }}
-            </x-primary-a>
+            </x-primary-a> --}}
             <x-primary-a :href="route('home', 'addmovie')" :active="request()->routeIs('movies.create')">
                 {{ __('Add Movie') }}
             </x-primary-a>
