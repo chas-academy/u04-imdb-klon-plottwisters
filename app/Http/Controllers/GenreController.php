@@ -13,7 +13,7 @@ class GenreController extends Controller
     public function index()
     {
         $genres = Genre::all();
-        $genres = Genre::paginate(18);
+        // $genres = Genre::paginate(18);
         return view('genre.all', compact('genres'));
     }
 

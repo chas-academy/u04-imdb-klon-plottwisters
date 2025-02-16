@@ -92,8 +92,8 @@ Route::post('/movies/{movie}/rate', [RatingController::class, 'store'])->name('r
 
 //#################### REVIEWS ##################
 
-Route::get('/movies/{movie}', [ReviewController::class, 'index'])
-    ->name('movies.show');
+// Route::get('/movies/{movie}', [ReviewController::class, 'index'])
+//     ->name('movies.show');
 
 Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
     ->middleware(['auth', 'verified'])
@@ -103,6 +103,14 @@ Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
 // Route::get('/admin/editUser', function () {
 //     return view('admin.edit');
 // });
+Route::put('/review/{id}', [ReviewController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('review.update');
+
+Route::get('/review/{id}', [ReviewController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('review.show');
+
 Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('review.destroy');
@@ -180,6 +188,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/movies/{movie}/edit', [AdminController::class, 'editMovie'])->name('admin.movies.edit');
     Route::put('/movies/{movie}', [AdminController::class, 'updateMovie'])->name('admin.movies.update');
     Route::delete('/movies/{movie}', [AdminController::class, 'deleteMovie'])->name('admin.movies.delete');
+    Route::get('/movies', [AdminController::class, 'setFeaturedMovie'])->name('admin.setfeatured');
 });
 
 

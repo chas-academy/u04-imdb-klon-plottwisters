@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use \App\Models\Movie;
 use \App\Models\User;
 use \App\Models\Rating;
+use \App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -111,25 +112,29 @@ class AdminController extends Controller
     }
 
 
-    public function setFeaturedMovie(Movie $movie)
+    public function setFeaturedMovie(Request $request)
     {
-        Movie::where('is_featured, true')->update(['is_featured' => false]);
+        $movieId = $request->input('featured');
+        
+        $selectedMovie = Movie::where('id', $movieId)->first();
+        Movie::where('is_featured', true)->update(['is_featured' => false]);
+        // dd($selectedMovie);
+        $selectedMovie->update(['is_featured' => 1]);
 
-        $movie->update(['is_featured' => true]);
-
-        return redirect()->back()->with('sucess', 'Featured movie updated.');
+        return redirect()->back()->with('success', 'Featured movie updated.');
     }
 
     public function usersIndex(Request $request)
     {
  
         $editingUserId = $request->input('editingUserId');
+        $reviews = Review::latest()->get();
 
     
         $users = User::all();
 
    
-        return view('admin.users.index', compact('users', 'editingUserId'));
+        return view('admin.users.index', compact('users', 'editingUserId', 'reviews'));
     }
 
     public function toggleUserRole(User $user)

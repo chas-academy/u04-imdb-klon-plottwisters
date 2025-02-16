@@ -1,4 +1,9 @@
 <x-head-layout>
+    {{-- @include ('layouts.navigation') --}}
+    <!-- Searchbar -->
+    <div class="md:hidden flex justify-center items-center py-2">
+        @include('components.searchbar')
+    </div>
 
     <div class="flex flex-1 items-start w-fit m-4 flex-col mx-auto">
         <h2 class="text-white font-bold text-3xl">Featured Movie</h2>
@@ -12,10 +17,22 @@
         @endif
 
         <div class="flex w-full justify-end gap-4 mt-4">
-            @if (Auth::check() && Auth::user()->name == 'admin')
-            <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
+            @if (Auth::check() && Auth::user()->is_admin)
+            <form action="{{ route('admin.setfeatured') }}" method="GET">
+                <label class="text-white mr-2">Set featured movie:</label>
+                <select class="rounded-md" name="featured" onchange="this.form.submit()">
+                    <option value="">All movies</option>
+    
+                    @foreach ($movies as $movie)
+                    <option value="{{ $movie->id }}" {{ request('movie') == $movie->id ? 'selected' : '' }}>
+                        {{ $movie->title }}
+                    </option>
+                    @endforeach
+                </select>
+            </form>
+            {{-- <x-primary-a :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Edit Featured Movie') }}
-            </x-primary-a>
+            </x-primary-a> --}}
             <x-primary-a :href="route('home', 'addmovie')" :active="request()->routeIs('movies.create')">
                 {{ __('Add Movie') }}
             </x-primary-a>
@@ -26,10 +43,7 @@
             @endif
         </div>
     </div>
-</x-head-layout>
-
-
-    {{-- @include ('layouts.navigation') --}}
+        {{-- @include ('layouts.navigation') --}}
 
     </div>
     <div class="bg-[#F15C5F] items-center justify-center flex rounded-md w-2/3 mx-auto">
@@ -51,8 +65,8 @@
         </form>
     </div>
     @include ('layouts.movies')
-
-
-
-    {{ $movies->links() }}
+    <div class="pb-20">
+        {{ $movies->links() }}
+    </div>
+</x-head-layout>
 
