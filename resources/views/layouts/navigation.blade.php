@@ -59,7 +59,7 @@
                         {{-- <x-dropdown-link :href="route('home')">
                             {{ __('Watchlist') }}
                         </x-dropdown-link> --}}
-                        @if (Auth::check() && Auth::user()->name == 'admin')
+                        @if (Auth::check() && Auth::user()->is_admin)
                         <x-dropdown-link :href="route('admin.users.index')">
                             {{ __('Admin') }}
                         </x-dropdown-link>

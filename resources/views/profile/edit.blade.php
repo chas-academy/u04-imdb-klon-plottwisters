@@ -61,9 +61,9 @@
                         </div>
                     </div>
                 </div>
-                <x-primary-button>
-                    Delete Account
-                </x-primary-button>
+                <div>
+                   @include('profile.partials.delete-user-form')
+                </div>
             </div>
         </div>
         <!-- Watchlist Section -->
