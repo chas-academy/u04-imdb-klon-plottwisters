@@ -64,3 +64,4 @@
 
     </div>
 </x-guest-layout>
+@include  ('components.footer')
