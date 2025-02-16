@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center space-y-2">
     <div class="flex flex-row gap-1 items-center">
-        <img src="{{ Storage::url('images/star.png')}}" alt="">
+        <img src="./images/star.png" alt="">
         <p class="text-[#A693FF]">{{ round($movie->average_rating, 1) }} / 10</p>
     </div>
     @auth
