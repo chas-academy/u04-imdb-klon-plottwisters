@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center m-4 gap-4">
     <p class=" text-white">{{ $movie['title'] }}</p>
 
-    <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info w-[200px] h-[300px]"><img src="{{ $movie->image_url}}" alt=""></a>
+    <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info w-[100px] h-[150px] md:w-[200px] md:h-[300px]"><img src="{{ $movie->image_url}}" alt=""></a>
     <div class="flex flex-row items-center">
         {{-- Add function for rating --}}
         {{-- <img src="{{ Storage::url('images/star.png')}}" alt=""><p class="text-[#A693FF]">3.1</p> --}}

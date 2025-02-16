@@ -61,9 +61,9 @@
                         </div>
                     </div>
                 </div>
-                <x-primary-button>
-                    Delete Account
-                </x-primary-button>
+                <div>
+                   @include('profile.partials.delete-user-form')
+                </div>
             </div>
         </div>
         <!-- Watchlist Section -->
@@ -129,7 +129,31 @@
                 @endforeach
             </div>
         </div>
+        <!--REVIEWS-->
+        <div class="mt-16">
+            <h2 class="font-bold text-2xl text-white mb-4">My Reviews</h2>
+            <div class="flex flex-row flex-wrap">
+                @foreach ($reviews as $review)
+                    <a href="{{ route('movies.show', $review->movie->id) }}" class="w-4/5 md:w-2/5 m-6">
+                        <div class="bg-white p-6 rounded-md shadow-md relative">
+                            @if (auth()->id() == $review->user_id) 
+                                <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="absolute top-4 right-4">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-primary-button type="submit" 
+                                        onclick="return confirm('Are you sure you want to delete this review?')">
+                                        Delete
+                                    </x-primary-button>
+                                </form>
+                            @endif
+                            
+                            <h3 class="font-bold text-lg">{{ $review->title }}</h3>
+                            <p class="mt-2">{{ $review->description }}</p>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
         </div>
-
+        
     </div>
 </x-app-layout>

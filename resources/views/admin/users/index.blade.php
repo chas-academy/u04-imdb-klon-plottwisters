@@ -4,11 +4,13 @@
             {{ __('Admin') }}
         </h2>
     </x-slot>
-    <div class="w-2/3 mx-auto mt-4">
+    <div class="w-full lg:w-2/3 mx-auto mt-4 px-4">
         <h2 class="text-white text-center text-4xl font-bold mb-4">Admin Panel</h2>
+        <div class="overflow-x-auto">
         <table class="min-w-full text-white border-collapse">
             <thead>
                 <tr class="bg-gray-700">
+                    <th class="px-6 py-4 text-center">Profile Picture</th>
                     <th class="px-6 py-4 text-center">Username</th>
                     <th class="px-6 py-4 text-center">Email</th>
                     <th class="px-6 py-4 text-center">Role</th>
@@ -18,6 +20,11 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr class="border-t border-gray-600">
+                        <td class="px-6 py-4 text-center">
+                            <img src="{{ asset('images/' . ($user->profile_picture ?? 'profile1.png')) }}" 
+                                class="w-12 h-12 rounded-full border-2 border-gray-300" 
+                                alt="User Profile Picture">
+                        </td>
                         <td class="px-6 py-4 text-center">
                             @if ($editingUserId == $user->id)
                                 <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
@@ -67,7 +74,8 @@
                                 <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <x-primary-button type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</x-primary-button>
+                                    <x-primary-button type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete
+                                    </x-primary-button>
                                 </form>
                             </div>
                         </td>
@@ -76,8 +84,34 @@
             </tbody>
         </table>
 				<!--- ADD REVIEWS --->
-        <div class="text-white mt-16">
-            <h2 class="font-bold text-2xl">Reviews</h2>
+        <div class="mt-16">
+            <h2 class="font-bold text-2xl text-white mb-4">User Reviews</h2>
+            <div class="flex flex-row flex-wrap ">
+                @foreach ($reviews as $review)
+                    <div class="bg-white p-6 rounded-md shadow-md relative m-6 w-4/5 md:w-2/5">
+                        <!-- Delete Button -->
+                        @if (auth()->user()->is_admin || auth()->id() == $review->user_id)
+                            <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="absolute top-4 right-4">
+                                @csrf
+                                @method('DELETE')
+                                <x-primary-button type="submit" 
+                                    onclick="return confirm('Are you sure you want to delete this review?')">
+                                    Delete
+                                </x-primary-button>
+                            </form>
+                        @endif
+
+                        <!-- User Information -->
+                        <p class="text-sm text-gray-500 mb-2">
+                            Posted by <strong>{{ $review->user->name }}</strong>
+                        </p>
+
+                        <!-- Review Content -->
+                        <h3 class="font-bold text-lg">{{ $review->title }}</h3>
+                        <p class="mt-2">{{ $review->description }}</p>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </x-app-layout>

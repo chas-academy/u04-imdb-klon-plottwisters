@@ -40,7 +40,7 @@ class RatingController extends Controller
         $avgRating = Rating::where('movie_id', $movie->id)->avg('rating');
         $movie->update(['average_rating' => round($avgRating, 1)]);
 
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     /**
