@@ -19,7 +19,7 @@ class MovieController extends Controller
 
         if ($selectedGenre) {
             $movies = Movie::whereHas('genres', function ($query) use ($selectedGenre) {
-                $query->where('id', $selectedGenre);
+                $query->where('genres.id', $selectedGenre);
             })->paginate(18);
         } else {
             $movies = Movie::paginate(20);
@@ -80,7 +80,7 @@ class MovieController extends Controller
         // Show a single movie
 
         $reviews = Review::where('movie_id', $movie->id)->get();
-        
+
         // dd($reviews);
         return view('movies.show', compact('movie', 'reviews'));
     }
