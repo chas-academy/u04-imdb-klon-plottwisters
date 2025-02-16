@@ -32,7 +32,7 @@ class ReviewControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user)
-        ->post('reviews', $reviewData);
+        ->post(route('reviews', $movie->id), $reviewData);
 
         $this->assertDatabaseHas('reviews', [
             'user_id' => $user->id,
@@ -41,7 +41,7 @@ class ReviewControllerTest extends TestCase
             'description' => 'Review Description',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertRedirect(route('movies.show', $movie->id));
 
     }
 
