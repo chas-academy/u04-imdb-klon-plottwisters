@@ -8,7 +8,7 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
-<div class="w-2/4 mx-auto absolute inset-0 top-20 px-8 bg-gray-200 h-fit pb-8">
+<div class="w-3/4 mx-auto absolute inset-0 top-20 bg-gray-200 h-fit pb-8">
     <a class="float-right p-4 " href="{{ route('home') }}">X</a>
     <form class="flex flex-col gap-2 mt-4 pl-12" action="@if (request()->has('edit')) {{ route('movies.update', $movie->id) }} @else {{ route('movies.store')}} @endif" method="POST">
         @csrf

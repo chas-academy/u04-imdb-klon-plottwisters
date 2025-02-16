@@ -29,7 +29,7 @@
         </div>
 
         <div class="flex flex-col w-2/3 mx-auto items-center gap-4">
-            <iframe width="560" height="315" src="{{ $movie->trailer_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe class="md:w-[560px] md:h-[315px]" src="{{ $movie->trailer_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <div class="flex w-full justify-end gap-4 mt-4">
                 @if (Auth::check() && Auth::user()->is_admin)
                     <x-primary-a :href="route('movies.show', ['movie' => $movie->id, 'edit', 'movieId' => $movie->id])" :active="request()->routeIs('movies.update')">
