@@ -24,9 +24,7 @@
         <label>Director name:</label>
         <input type="text" value="@if (request()->has('edit')) {{ $movie->director_name }} @endif" name="director_name" required>
         <label>Description</label>
-        <textarea rows="15" name="description" required>
-            @if (request()->has('edit')) {{ $movie->description }} @endif
-        </textarea>
+        <textarea rows="15" name="description" required>@if (request()->has('edit')) {{ $movie->description }} @endif </textarea>
         <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto" type="submit">Save</button>
     </form>
     @if (request()->has('edit'))

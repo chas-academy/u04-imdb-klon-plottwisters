@@ -17,7 +17,7 @@
         @endif
 
         <div class="flex w-full justify-end gap-4 mt-4">
-            @if (Auth::check() && Auth::user()->name == 'admin')
+            @if (Auth::check() && Auth::user()->is_admin)
             <form action="{{ route('admin.setfeatured') }}" method="GET">
                 <label class="text-white mr-2">Set featured movie:</label>
                 <select class="rounded-md" name="featured" onchange="this.form.submit()">
