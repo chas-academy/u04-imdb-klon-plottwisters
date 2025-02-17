@@ -32,7 +32,7 @@ class GenreController extends Controller
     public function store(Request $request)
     {
 
-Genre::create(['genre_name' => $request->name]);
+        Genre::create(['genre_name' => $request->name]);
 
 
 
@@ -44,7 +44,7 @@ Genre::create(['genre_name' => $request->name]);
     /**
      * Display the specified resource.
      */
- public function show(Genre $genre)
+    public function show(Genre $genre)
     {
         // Show a single genre
         return view('genre.show', compact('genre'));
@@ -56,7 +56,7 @@ Genre::create(['genre_name' => $request->name]);
      */
     public function edit(Genre $genre)
     {
-       return view('genre.edit', compact('genre'));
+        return view('genre.edit', compact('genre'));
     }
 
     /**
@@ -68,8 +68,8 @@ Genre::create(['genre_name' => $request->name]);
                     'genre_name' => $request->genre_name,
                 ]);
 
-                // Redirect to the genre list with success message
-                return redirect()->route('genre.index')->with('success', 'genre updated successfully!');
+        // Redirect to the genre list with success message
+        return redirect()->route('genre.index')->with('success', 'genre updated successfully!');
 
     }
 

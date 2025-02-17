@@ -19,7 +19,7 @@ class Movie_GenreFactory extends Factory
         static $number = '1';
         return [
             'movie_id' => $number++,
-            'genre_id' => rand(1,5)
+            'genre_id' => rand(1, 5)
         ];
     }
 }

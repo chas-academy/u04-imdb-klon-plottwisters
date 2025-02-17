@@ -5,32 +5,33 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Model;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
-    
+
     protected $fillable = ['name', 'email', 'password', 'is_admin', 'profile_picture'];
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany(Review::class, 'user_id');
     }
 
-    public function watchlists() {
+    public function watchlists()
+    {
         return $this->hasMany(Watchlist::class, 'user_id');
     }
 
     // Create wathclist so new users always have one
-   protected static function booted()
+    protected static function booted()
     {
-    static::created(function ($user) {
-        Watchlist::create([
-            'watchlist_name' => 'My List',
-            'user_id' => $user->id,
-        ]);
-    });
+        static::created(function ($user) {
+            Watchlist::create([
+                'watchlist_name' => 'My List',
+                'user_id' => $user->id,
+            ]);
+        });
     }
 
     /**

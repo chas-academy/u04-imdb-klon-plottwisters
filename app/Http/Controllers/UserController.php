@@ -48,7 +48,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User updated successfully.');
     }
 
-    // Delete user 
+    // Delete user
     public function destroy(User $user)
     {
         if ($user->id !== Auth::id() && !Auth::user()->is_admin) {
@@ -66,7 +66,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Unauthorized.');
 
         }
-        
+
         $user = User::paginate(9);
         return view('user.index', compact('users'));
     }

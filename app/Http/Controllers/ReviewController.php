@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class ReviewController extends Controller
 {
-        /**
+    /**
      * Show the form for creating a new resource.
      */
     // public function create(): View
@@ -21,12 +21,12 @@ class ReviewController extends Controller
     // Create review
     public function store(Request $request, Movie $movie)
     {
-                                                                                                                                                                                            
+
         $request->validate([
             'title' => 'required|string|max:1000',
             'description' => 'required|string|max:4000',
         ]);
-     
+
         Review::create([
             'user_id' => Auth::id(),
             'movie_id' => $movie->id,
@@ -35,7 +35,7 @@ class ReviewController extends Controller
 
         ]);
 
-        return redirect()->route('movies.show', $movie->id); 
+        return redirect()->route('movies.show', $movie->id);
     }
 
     // Show reviews
@@ -46,8 +46,8 @@ class ReviewController extends Controller
         $reviews = Review::where('movie_id', $movie->id)->latest()->get();
         $movie = $movie;
         // return response()->json($reviews);
-        
-        
+
+
         return view('movies.show', compact('reviews', 'movie'));
     }
 
@@ -65,17 +65,17 @@ class ReviewController extends Controller
     {
         $movie = Movie::findOrFail($request->movie_id);
         // dd($movie);
-       $review = Review::findOrFail($request->id);
-    //    dd($review);
+        $review = Review::findOrFail($request->id);
+        //    dd($review);
         if ($review->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'unauthorized');
         }
-        
+
         $validated = $request->validate([
             'title' => 'required|string|max:1000',
             'description' => 'required|string|max:4000',
         ]);
-        
+
 
         $review->update($validated);
 
@@ -86,7 +86,7 @@ class ReviewController extends Controller
 
     public function destroy(Review $review)
     {
-        
+
         if ($review->user_id !== Auth::id() && !Auth::user()->is_admin) {
             return redirect()->back()->with('error', 'unauthorized');
         }
