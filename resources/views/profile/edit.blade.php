@@ -107,7 +107,7 @@
                             @foreach ($watchlist->movies as $movie)
                                 <li class="flex justify-between my-2 text-white flex-col text-center pr-4">
                                     <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">
-                                        <img src="{{ $movie->image_url }}" alt="" >
+                                        <img class="w-[100px] h-[150px] md:w-[200px] md:h-[300px]" src="{{ $movie->image_url }}" alt="" >
                                         {{ $movie->title }}
                                     </a>
                                     <form action="{{ route('watchlists.removeMovie', [$watchlist->id, $movie->id]) }}" method="POST">
