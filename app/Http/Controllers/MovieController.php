@@ -38,7 +38,7 @@ class MovieController extends Controller
     public function create()
     {
         $genres = Genre::all(); // Fetch all available genres
-        return view('movies.create',  compact('genres'));
+        return view('movies.create', compact('genres'));
     }
 
     /**

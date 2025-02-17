@@ -3,13 +3,10 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Http\Controllers\MovieController;
 use App\Models\Movie;
 use App\Models\User;
 use App\Models\Genre;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class MovieControllerTest extends TestCase
 {

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-
 use Illuminate\Routing\UrlGenerator as RoutingUrlGenerator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;

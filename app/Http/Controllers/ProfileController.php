@@ -17,28 +17,28 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
 
-    $user = $request->user();
+        $user = $request->user();
 
-    return view('profile.edit', [
-        'user' => $user,
-        'watchlists' => $user->watchlists,
-        'reviews' => $user->reviews,
-    ]);
+        return view('profile.edit', [
+            'user' => $user,
+            'watchlists' => $user->watchlists,
+            'reviews' => $user->reviews,
+        ]);
     }
 
     public function updatePicture(Request $request): RedirectResponse
-{
-    $request->validate([
-        'profile_picture' => 'required|in:profile1.png,profile2.png,profile3.png',
-    ]);
+    {
+        $request->validate([
+            'profile_picture' => 'required|in:profile1.png,profile2.png,profile3.png',
+        ]);
 
-    // Update user's profile picture
-    $user = Auth::user();
-    $user->profile_picture = $request->profile_picture;
-    $user->save();
+        // Update user's profile picture
+        $user = Auth::user();
+        $user->profile_picture = $request->profile_picture;
+        $user->save();
 
-    return Redirect::route('profile.edit');
-}
+        return Redirect::route('profile.edit');
+    }
 
     /**
      * Update the user's profile information.

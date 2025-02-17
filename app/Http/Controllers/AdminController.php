@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use \App\Models\Movie;
-use \App\Models\User;
-use \App\Models\Rating;
-use \App\Models\Review;
+use App\Models\Movie;
+use App\Models\User;
+use App\Models\Rating;
+use App\Models\Review;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -92,16 +91,16 @@ class AdminController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
         ]);
-       
+
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
-         if (!empty($validated['password'])) {
+        if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
 
         $user->save();
-      
+
         return redirect()->route('admin.users.index')->with('success', 'User updated.');
     }
 
@@ -115,7 +114,7 @@ class AdminController extends Controller
     public function setFeaturedMovie(Request $request)
     {
         $movieId = $request->input('featured');
-        
+
         $selectedMovie = Movie::where('id', $movieId)->first();
         Movie::where('is_featured', true)->update(['is_featured' => false]);
         // dd($selectedMovie);
@@ -126,24 +125,24 @@ class AdminController extends Controller
 
     public function usersIndex(Request $request)
     {
- 
+
         $editingUserId = $request->input('editingUserId');
         $reviews = Review::latest()->get();
 
-    
+
         $users = User::all();
 
-   
+
         return view('admin.users.index', compact('users', 'editingUserId', 'reviews'));
     }
 
     public function toggleUserRole(User $user)
-{
-    $user->is_admin = !$user->is_admin;
-    $user->save();
+    {
+        $user->is_admin = !$user->is_admin;
+        $user->save();
 
-    return redirect()->route('admin.users.index')->with('success', 'User role updated.');
-}
+        return redirect()->route('admin.users.index')->with('success', 'User role updated.');
+    }
 
 
 }

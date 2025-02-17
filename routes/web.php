@@ -6,13 +6,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RatingController;
-
 use App\Http\Controllers\AdminController;
-
 use App\Models\Movie;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
-
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -157,7 +154,7 @@ Route::post('/profile/update-picture', [ProfileController::class, 'updatePicture
 
 //####################Watchlist##################
 Route::middleware(['auth'])->group(function () {
-    
+
 
     Route::post('/watchlists', [WatchlistController::class, 'store'])->name('watchlists.store');
     Route::get('/watchlists/create', [WatchlistController::class, 'create'])->middleware('auth')->name('watchlists.create');
