@@ -25,13 +25,13 @@
         <input type="text" value="@if (request()->has('edit')) {{ $movie->director_name }} @endif" name="director_name" required>
         <label>Description</label>
         <textarea rows="15" name="description" required>@if (request()->has('edit')) {{ $movie->description }} @endif </textarea>
-        <button class="btn btn-info bg-[#20C8A6] text-center rounded-md font-bold w-1/3 mx-auto" type="submit">Save</button>
+        <x-primary-button class=" w-1/4 mx-auto justify-center" type="submit">Save</x-primary-button>
     </form>
     @if (request()->has('edit'))
         <form class="flex justify-center pb-20" action="{{ route('movies.destroy', [$movie->id, 'delete'])}}" method="POST">
             @csrf
             @method ('DELETE')
-            <button class="btn btn-info bg-[#F15C5F] text-center rounded-md font-bold w-1/4 mx-auto mt-4" type="submit" value="delete">Delete</button>
+            <x-delete-button class="w-1/5 mx-auto mt-4 justify-center" type="submit" value="delete">Delete</x-delete-button>
         </form>
     @endif  
 </div>

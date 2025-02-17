@@ -107,7 +107,7 @@
                             @foreach ($watchlist->movies as $movie)
                                 <li class="flex justify-between my-2 text-white flex-col text-center pr-4">
                                     <a href="{{ route('movies.show', $movie->id) }}" class="btn btn-info">
-                                        <img src="{{ $movie->image_url }}" alt="" >
+                                        <img class="w-[100px] h-[150px] md:w-[200px] md:h-[300px]" src="{{ $movie->image_url }}" alt="" >
                                         {{ $movie->title }}
                                     </a>
                                     <form action="{{ route('watchlists.removeMovie', [$watchlist->id, $movie->id]) }}" method="POST">
@@ -123,7 +123,7 @@
                         <form action="{{ route('watchlists.delete', $watchlist->id) }}" method="POST" class="mt-4">
                             @csrf
                             @method('DELETE')
-                            <x-primary-button type="submit">Delete Watchlist</x-primary-button>
+                            <x-delete-button type="submit">Delete Watchlist</x-delete-button>
                         </form>
                     </div>
                 @endforeach
@@ -140,10 +140,10 @@
                                 <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="absolute top-4 right-4">
                                     @csrf
                                     @method('DELETE')
-                                    <x-primary-button type="submit" 
+                                    <x-delete-button type="submit" 
                                         onclick="return confirm('Are you sure you want to delete this review?')">
                                         Delete
-                                    </x-primary-button>
+                                    </x-delete-button>
                                 </form>
                             @endif
                             
