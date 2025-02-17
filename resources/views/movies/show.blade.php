@@ -52,10 +52,10 @@
                     <form action="{{ route('review.destroy', [$review->id, 'delete'])}}" method="POST">
                         @csrf
                         @method ('DELETE')
-                        <button class="inline-flex items-center w-xl px-3 py-2 bg-[#F15C5F] border border-transparent rounded-xl font-semibold text-xs text-black uppercase mr-2" type="submit" 
+                        <x-delete-button type="submit" 
                             onclick="return confirm('Are you sure you want to delete this review?')">
                             Delete
-                        <button>
+                        </x-delete-buttonbutton>
                     </form>
                     <x-primary-a :href="route('movies.show', ['movie' => $movie->id, 'reviewEdit', 'reviewId' => $review->id])" :active="request()->routeIs('movies.show', [$movie->id, 'reviewEdit', $review->id])">
                         {{ __('Edit') }}

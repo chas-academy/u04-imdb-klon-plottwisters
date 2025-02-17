@@ -24,11 +24,11 @@
                     <p class="text-white mt-2 text-center">You have no watchlists. Create one to add movies!</p>
                 @else
                     {{-- Add to Watchlist Button --}}
-                    <button class="inline-flex items-center w-xl px-3 py-2 bg-teal-700 border border-transparent rounded-xl font-semibold text-xs text-black uppercase w-[150px]" 
+                    <x-primary-button class="w-[150px]" 
                         @click="showWatchlistDropdown = !showWatchlistDropdown" 
                         >
                         Add to Watchlist
-                    </button>
+                    </x-primary-button>
                     <div x-show="showWatchlistDropdown" x-transition class="mt-4 ">
                         <form action="{{ route('watchlists.addMovie') }}" method="POST" class="flex flex-col">
                             @csrf
