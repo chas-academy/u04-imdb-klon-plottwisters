@@ -1,6 +1,7 @@
 # PlotTwisters (IMDB klon)
 The assignment:
 Create a clone of the website IMDB. With authentication and authorization with CRUD functions.  
+[Deployed](https://u04-imdb-klon-plottwisters.onrender.com/)
 
 As a public user you can:  
 + Browse all movies

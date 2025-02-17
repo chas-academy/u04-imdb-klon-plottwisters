@@ -7,7 +7,7 @@
 
     <title>PlotTwisters</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="resources\css\icon\PT.svg">
+    <link rel="shortcut icon" type="image/x-icon" href=".\images\favicon.ico">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
